@@ -33,12 +33,14 @@ function App() {
     <>
 
       <section>
-        <div className="flex ">
+        <div className=" ">
 
+          <div className="">
           {!hideNavAndFooterRoutes.includes(location.pathname) && <Navbar />}
+          </div>
 
 
-          <Routes>
+          <Routes className="">
 
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<Login />} />
@@ -93,6 +95,11 @@ function App() {
             <Route path='/Mentor-Profile' element={<MentorProfile />} />
             <Route path='/Intern-Profile' element={<InternProfile />} />
             <Route path='/Recrut-Profile' element={<RecruiterProfile />} />
+
+
+
+
+
           </Routes>
 
         </div>
