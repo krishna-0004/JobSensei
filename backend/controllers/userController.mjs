@@ -58,14 +58,20 @@ export const selectRole = async (req, res) => {
   }
 };
 
-// ✅ Step 4a: Submit Recruiter Form
 export const submitRecruiterDetails = async (req, res) => {
   try {
     const userId = req.user.id;
     const {
-      companyName, website, registrationId, industry, companySize,
-      businessEmail, address, pitchDeckUrl,
-    } = req.body;
+      companyName,
+      website,
+      registrationId,
+      industry,
+      companySize,
+      businessEmail,
+      address,
+      pitchDeckUrl,
+      isBusinessSubmitted
+    } = req.body.businessDetails || {}; // ✅ Extract from nested object
 
     const user = await User.findById(userId);
     if (!user || user.role !== 'recruiter') {
@@ -73,9 +79,15 @@ export const submitRecruiterDetails = async (req, res) => {
     }
 
     user.businessDetails = {
-      companyName, website, registrationId, industry,
-      companySize, businessEmail, address, pitchDeckUrl,
-      isBusinessSubmitted: true,
+      companyName,
+      website,
+      registrationId,
+      industry,
+      companySize,
+      businessEmail,
+      address,
+      pitchDeckUrl,
+      isBusinessSubmitted: isBusinessSubmitted ?? true,
     };
 
     user.verificationStatus = 'submitted';
@@ -88,14 +100,19 @@ export const submitRecruiterDetails = async (req, res) => {
   }
 };
 
-// ✅ Step 4b: Submit Mentor Form
 export const submitMentorDetails = async (req, res) => {
   try {
     const userId = req.user.id;
     const {
-      expertise, linkedIn, experienceYears, currentPosition,
-      company, certifications, portfolioUrl,
-    } = req.body;
+      expertise,
+      linkedIn,
+      experienceYears,
+      currentPosition,
+      company,
+      certifications,
+      portfolioUrl,
+      isMentorSubmitted
+    } = req.body.mentorDetails || {}; // ✅ Extract from nested object
 
     const user = await User.findById(userId);
     if (!user || user.role !== 'mentor') {
@@ -103,9 +120,14 @@ export const submitMentorDetails = async (req, res) => {
     }
 
     user.mentorDetails = {
-      expertise, linkedIn, experienceYears, currentPosition,
-      company, certifications, portfolioUrl,
-      isMentorSubmitted: true,
+      expertise,
+      linkedIn,
+      experienceYears,
+      currentPosition,
+      company,
+      certifications,
+      portfolioUrl,
+      isMentorSubmitted: isMentorSubmitted ?? true,
     };
 
     user.verificationStatus = 'submitted';
