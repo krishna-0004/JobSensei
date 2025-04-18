@@ -1,14 +1,17 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { UserCircle2, GraduationCap, Briefcase } from 'lucide-react';
 
 const RoleSelectionPage = () => {
   const [selectedRole, setSelectedRole] = useState('');
   const navigate = useNavigate();
   const token = localStorage.getItem('token');
 
+  const isFormComplete = selectedRole !== '';
+
   const handleRoleSelect = async () => {
-    if (!selectedRole) {
+    if (!isFormComplete) {
       alert('Please select a role.');
       return;
     }
@@ -25,11 +28,9 @@ const RoleSelectionPage = () => {
         }
       );
 
-      // ✅ Save updated token with new role
       localStorage.setItem('token', response.data.token);
       console.log('✅ Role updated:', response.data.user);
 
-      // 🌐 Route based on selected role
       const roleRoutes = {
         intan: '/intan',
         mentor: '/mentor-from',
@@ -46,42 +47,68 @@ const RoleSelectionPage = () => {
   };
 
   return (
-    <div>
-      <h2>Select Your Role</h2>
-      <div>
-        <label>
-          <input
-            type="radio"
-            name="role"
-            value="intan"
-            checked={selectedRole === 'intan'}
-            onChange={(e) => setSelectedRole(e.target.value)}
-          />
-          Intan
-        </label>
-        <label>
-          <input
-            type="radio"
-            name="role"
-            value="mentor"
-            checked={selectedRole === 'mentor'}
-            onChange={(e) => setSelectedRole(e.target.value)}
-          />
-          Mentor
-        </label>
-        <label>
-          <input
-            type="radio"
-            name="role"
-            value="recruiter"
-            checked={selectedRole === 'recruiter'}
-            onChange={(e) => setSelectedRole(e.target.value)}
-          />
-          Recruiter
-        </label>
+    <section className="h-screen font-RS bg-[#F0F9FF]  text-black">
+      <div className="flex justify-center items-center h-screen">
+        <div className="w-full md:max-w-md mx-auto bg-white/10 backdrop-blur-3xl rounded-3xl md:p-10 max-md:py-10 max-md:px-5 border border-white/20 shadow-lg">
+          <h2 className="text-center text-3xl font-semibold">Select Your Role</h2>
+
+          <div className="flex justify-center items-center gap-6 my-6 flex-wrap">
+            <label className="flex items-center gap-2 cursor-pointer">
+              <input
+                type="radio"
+                name="role"
+                value="intan"
+                checked={selectedRole === 'intan'}
+                onChange={(e) => setSelectedRole(e.target.value)}
+              />
+              <UserCircle2 />
+              <span>Intern</span>
+            </label>
+
+            <label className="flex items-center gap-2 cursor-pointer">
+              <input
+                type="radio"
+                name="role"
+                value="mentor"
+                checked={selectedRole === 'mentor'}
+                onChange={(e) => setSelectedRole(e.target.value)}
+              />
+              <GraduationCap />
+              <span>Mentor</span>
+            </label>
+
+            <label className="flex items-center gap-2 cursor-pointer">
+              <input
+                type="radio"
+                name="role"
+                value="recruiter"
+                checked={selectedRole === 'recruiter'}
+                onChange={(e) => setSelectedRole(e.target.value)}
+              />
+              <Briefcase />
+              <span>Recruiter</span>
+            </label>
+          </div>
+
+          <div className="flex justify-end">
+          <button
+            onClick={handleRoleSelect}
+            type="submit"
+            id="animatedBtn"
+            disabled={!isFormComplete}
+            className={`px-10 py-2 font-bold text-xl  text-white rounded-full border-2 bg-[#0691FF] relative overflow-hidden z-10 transition duration-150 ${
+              isFormComplete
+                ? 'hover:scale-110 cursor-pointer'
+                : 'opacity-50 cursor-not-allowed'
+            }`}
+          >
+            
+            <span className="relative z-10">Next</span>
+          </button>
+          </div>
+        </div>
       </div>
-      <button onClick={handleRoleSelect}>Continue</button>
-    </div>
+    </section>
   );
 };
 

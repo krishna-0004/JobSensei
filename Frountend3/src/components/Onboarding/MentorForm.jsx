@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { Briefcase, Globe, BadgeCheck, FileText, User } from 'lucide-react';
 
 const MentorForm = () => {
   const [formData, setFormData] = useState({
@@ -24,6 +25,8 @@ const MentorForm = () => {
     }));
   };
 
+  const isFormComplete = Object.values(formData).every((field) => field.trim() !== '');
+
   const handleSubmit = async () => {
     try {
       const payload = {
@@ -44,7 +47,7 @@ const MentorForm = () => {
 
       console.log('✅ Mentor form submitted:', response.data);
       alert('Form submitted for admin approval. You’ll be notified once approved.');
-      navigate('/mentor-pending'); // You can create a waiting screen here
+      navigate('/mentor-pending');
     } catch (error) {
       const message = error.response?.data?.message || error.message;
       console.error('❌ Submit error:', message);
@@ -53,62 +56,51 @@ const MentorForm = () => {
   };
 
   return (
-    <div>
-      <h2>Mentor Details</h2>
+    <section className="min-h-screen font-RS bg-[#F0F9FF] text-black flex items-center justify-center p-4">
+     
 
-      <input
-        type="text"
-        name="expertise"
-        placeholder="Expertise (comma separated)"
-        value={formData.expertise}
-        onChange={handleChange}
-      />
-      <input
-        type="text"
-        name="linkedIn"
-        placeholder="LinkedIn Profile URL"
-        value={formData.linkedIn}
-        onChange={handleChange}
-      />
-      <input
-        type="number"
-        name="experienceYears"
-        placeholder="Years of Experience"
-        value={formData.experienceYears}
-        onChange={handleChange}
-      />
-      <input
-        type="text"
-        name="currentPosition"
-        placeholder="Current Position"
-        value={formData.currentPosition}
-        onChange={handleChange}
-      />
-      <input
-        type="text"
-        name="company"
-        placeholder="Company"
-        value={formData.company}
-        onChange={handleChange}
-      />
-      <input
-        type="text"
-        name="certifications"
-        placeholder="Certifications (comma separated)"
-        value={formData.certifications}
-        onChange={handleChange}
-      />
-      <input
-        type="text"
-        name="portfolioUrl"
-        placeholder="Portfolio URL"
-        value={formData.portfolioUrl}
-        onChange={handleChange}
-      />
+      <div className="w-full max-w-2xl bg-[#F0F9FF] rounded-2xl shadow-lg p-8 border border-white/20">
+        <h2 className="text-3xl font-bold text-center mb-8">Mentor Details</h2>
 
-      <button onClick={handleSubmit}>Submit for Approval</button>
-    </div>
+        <div className="space-y-4">
+          <InputField icon={<User />} placeholder="Expertise (comma separated)" name="expertise" value={formData.expertise} onChange={handleChange} />
+          <InputField icon={<Globe />} placeholder="LinkedIn Profile URL" name="linkedIn" value={formData.linkedIn} onChange={handleChange} />
+          <InputField icon={<BadgeCheck />} type="number" placeholder="Years of Experience" name="experienceYears" value={formData.experienceYears} onChange={handleChange} />
+          <InputField icon={<Briefcase />} placeholder="Current Position" name="currentPosition" value={formData.currentPosition} onChange={handleChange} />
+          <InputField icon={<Briefcase />} placeholder="Company" name="company" value={formData.company} onChange={handleChange} />
+          <InputField icon={<FileText />} placeholder="Certifications (comma separated)" name="certifications" value={formData.certifications} onChange={handleChange} />
+          <InputField icon={<Globe />} placeholder="Portfolio URL" name="portfolioUrl" value={formData.portfolioUrl} onChange={handleChange} />
+        </div>
+
+        <button
+          onClick={handleSubmit}
+          type="submit"
+         
+          disabled={!isFormComplete}
+          className={`mt-6 w-full px-10 py-2 font-bold text-xl text-white bg-[#0691FF] rounded-full border-2  relative overflow-hidden z-10 transition duration-150 ${
+            isFormComplete ? 'hover:scale-105 cursor-pointer' : 'opacity-50 cursor-not-allowed'
+          }`}
+        >
+          
+          <span className="relative z-10">Submit for Approval</span>
+        </button>
+      </div>
+    </section>
   );
 };
+
+const InputField = ({ icon, placeholder, name, value, onChange, type = 'text' }) => (
+  <div className="flex items-center text-black gap-3 bg-white/10 border border-gray-600 p-3 rounded-xl ">
+    <div className="text-black">{icon}</div>
+    <input
+      type={type}
+      name={name}
+      placeholder={placeholder}
+      value={value}
+      onChange={onChange}
+      className="w-full bg-transparent outline-none text-black placeholder:text-gray-400"
+    />
+  </div>
+);
 
 export default MentorForm;

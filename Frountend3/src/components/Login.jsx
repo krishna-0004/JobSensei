@@ -72,7 +72,7 @@ const Login = () => {
     <>
 
       <section className="overflow-hidden" >
-        <div className="grid md:grid-cols-2 font-RS bg-black  ">
+        <div className="grid md:grid-cols-2 font-RS bg-[#F0F9FF]  ">
           <div
             className=" md:h-screen max-md:w-screen  md:block  bg-cover bg-center text-white p-10 md:pr-44"
             style={{ backgroundImage: `url(/Images/login2.png)` }}
@@ -104,11 +104,11 @@ const Login = () => {
             </div>
 
           </div>
-          <div className=" bg-black text-white flex flex-col justify-center items-center">
+          <div className=" bg-[#F0F9FF] text-black flex flex-col justify-center items-center">
 
 
 
-            <div className=" w-full md:max-w-md mx-auto bg-white/10 backdrop-blur-3xl rounded-3xl md:p-10 max-md:py-10 max-md:px-5 border border-white/20 shadow-lg " id="login">
+            <div className=" w-full md:max-w-md mx-auto bg-black/10 backdrop-blur-3xl rounded-3xl md:p-10 max-md:py-10 max-md:px-5 border border-white/20 shadow-lg " id="login">
               <div className="">
                 <h1 className="text-4xl font-bold text-center">LogIn</h1>
 
@@ -122,7 +122,7 @@ const Login = () => {
                   >
                     <button
                       onClick={handleGoogleLogin}
-                      className="bg-black text-white flex justify-center items-center gap-4 py-2 px-10 
+                      className=" bg-white flex justify-center items-center gap-4 py-2 px-10 
                      rounded-[2rem] font-semibold shadow-md"
                     >
                       <img src="/Images/google.png" alt="Google" className="w-8 h-8" />
@@ -138,7 +138,7 @@ const Login = () => {
                   >
                     <button
                       // onClick={loginWithGitHub}
-                      className="bg-black text-white flex justify-center items-center gap-4 py-2 px-10 
+                      className=" bg-white flex justify-center items-center gap-4 py-2 px-10 
                      rounded-[2rem] font-semibold shadow-md"
                     >
                       <img src="/Images/github.png" alt="GitHub" className="w-8 h-8" />
@@ -154,7 +154,7 @@ const Login = () => {
                   >
                     <button
                       // onClick={loginWithLinkedIn}
-                      className="bg-black text-white flex justify-center items-center gap-4 py-2 px-10 
+                      className=" bg-white flex justify-center items-center gap-4 py-2 px-10 
                      rounded-[2rem] font-semibold shadow-md"
                     >
                       <img src="/Images/linkedin.png" alt="LinkedIn" className="w-8 h-8" />

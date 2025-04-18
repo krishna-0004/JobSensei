@@ -14,7 +14,9 @@ import MentorForm from './components/Onboarding/MentorForm';
 import RecruiterForm from './components/Onboarding/RecruiterForm';
 import PendingPage from './components/Onboarding/PendingPage';
 
-import ProtectedRoute from './utils/ProtectedRoute'; // Assuming this is already created
+import ProtectedRoute from './utils/ProtectedRoute';
+ // Assuming this is already created
+import './App.css'
 
 function App() {
   const location = useLocation();
