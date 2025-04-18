@@ -36,10 +36,10 @@ const Login = () => {
     tl.from("#left ", {
       opacity: 0,
       y: 20,
-      duration: 0.5,
+      duration: 0.2,
       delay: 0.1,
 
-      stagger: 0.5,
+      stagger: 0.2,
 
     })
 
@@ -48,14 +48,14 @@ const Login = () => {
       opacity: 0,
       y: 20,
       duration: 0.2,
-      stagger: 0.5,
+      stagger: 0.2,
 
     })
 
     tl.from("#login div", {
       y:20,
       opacity:0,
-      duration:0.5,
+      duration:0.2,
       stagger:0.2,
     })
 

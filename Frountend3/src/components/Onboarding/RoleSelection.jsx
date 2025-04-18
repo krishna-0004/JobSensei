@@ -52,7 +52,7 @@ const RoleSelectionPage = () => {
         <div className="w-full md:max-w-md mx-auto bg-white/10 backdrop-blur-3xl rounded-3xl md:p-10 max-md:py-10 max-md:px-5 border border-white/20 shadow-lg">
           <h2 className="text-center text-3xl font-semibold">Select Your Role</h2>
 
-          <div className="flex justify-center items-center gap-6 my-6 flex-wrap">
+          <div className="flex max-md:flex-col max-md:mx-24  md:justify-center md:items-center gap-6 my-6 flex-wrap">
             <label className="flex items-center gap-2 cursor-pointer">
               <input
                 type="radio"

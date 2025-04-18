@@ -15,12 +15,15 @@ import RecruiterForm from './components/Onboarding/RecruiterForm';
 import PendingPage from './components/Onboarding/PendingPage';
 
 import ProtectedRoute from './utils/ProtectedRoute';
- // Assuming this is already created
+// Assuming this is already created
 import './App.css'
+import MentorProfile from './components/Profile/MentorProfile';
+import InternProfile from './components/Profile/InternProfile';
+import RecruiterProfile from './components/Profile/RecruiterProfile';
 
 function App() {
   const location = useLocation();
-  const hideNavAndFooterRoutes = ['/', '/login', '/common-profile', '/select-role','/mentor-from', '/recruiter-form', '/mentor-pending'];
+  const hideNavAndFooterRoutes = ['/', '/login', '/common-profile', '/select-role', '/mentor-from', '/recruiter-form', '/mentor-pending'];
 
 
 
@@ -29,58 +32,71 @@ function App() {
 
     <>
 
-      {!hideNavAndFooterRoutes.includes(location.pathname) && <Navbar />}
+      <section>
+        <div className="flex ">
+
+          {!hideNavAndFooterRoutes.includes(location.pathname) && <Navbar />}
 
 
-      <Routes>
+          <Routes>
 
-        <Route path="/" element={<Home />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/auth-success" element={<AuthSuccess />} />
-        <Route path="/select-role" element={<RoleSelectionPage />} />
-        <Route path="/common-profile" element={<CommonProfileForm />} />
+            <Route path="/" element={<Home />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/auth-success" element={<AuthSuccess />} />
+            <Route path="/select-role" element={<RoleSelectionPage />} />
+            <Route path="/common-profile" element={<CommonProfileForm />} />
 
-        {/* Role-specific Forms */}
-        <Route path="/mentor-from" element={<MentorForm />} />
-        <Route path="/recruiter-form" element={<RecruiterForm />} />
-        <Route path="/pending" element={<PendingPage />} />
+            {/* Role-specific Forms */}
+            <Route path="/mentor-from" element={<MentorForm />} />
+            <Route path="/recruiter-form" element={<RecruiterForm />} />
+            <Route path="/pending" element={<PendingPage />} />
 
-        {/* Protected dashboards by role */}
-        <Route
-          path="/admin"
-          element={
-            <ProtectedRoute allowedRole="admin">
-              <AdminDashboard />
-            </ProtectedRoute>
-          }
-        />
 
-        <Route
-          path="/intan"
-          element={
-            <ProtectedRoute allowedRole="intan">
-              <IntanDashboard />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/mentor-dashboard"
-          element={
-            <ProtectedRoute allowedRole="mentor">
-              <MentorDashboard />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/recruiter-dashboard"
-          element={
-            <ProtectedRoute allowedRole="recruiter">
-              <RecruiterDashboard />
-            </ProtectedRoute>
-          }
-        />
-      </Routes>
 
+            {/* Protected dashboards by role */}
+            <Route
+              path="/admin"
+              element={
+                <ProtectedRoute allowedRole="admin">
+                  <AdminDashboard />
+                </ProtectedRoute>
+              }
+            />
+
+            <Route
+              path="/intan"
+              element={
+                <ProtectedRoute allowedRole="intan">
+                  <IntanDashboard />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/mentor-dashboard"
+              element={
+                <ProtectedRoute allowedRole="mentor">
+                  <MentorDashboard />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/recruiter-dashboard"
+              element={
+                <ProtectedRoute allowedRole="recruiter">
+                  <RecruiterDashboard />
+                </ProtectedRoute>
+              }
+            />
+
+
+            {/* Profiles */}
+            <Route path='/Mentor-Profile' element={<MentorProfile />} />
+            <Route path='/Intern-Profile' element={<InternProfile />} />
+            <Route path='/Recrut-Profile' element={<RecruiterProfile />} />
+          </Routes>
+
+        </div>
+      </section>
 
     </>
 

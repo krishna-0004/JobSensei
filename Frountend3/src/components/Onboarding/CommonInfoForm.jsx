@@ -62,8 +62,8 @@ const CommonProfile = () => {
       <section className="bg-[#F0F9FF]">
 
 
-        <div className="relative z-20 px-10 py-5 font-RS text-black h-screen flex justify-center items-center ">
-          <div className='w-full max-w-2xl mx-auto bg-[#F0F9FF] backdrop-blur-3xl rounded-3xl md:p-10  max-md:py-10 max-md:px-5 border border-white/20 shadow-lg'>
+        <div className="relative z-20 md:px-10 px-4 py-5 font-RS text-black h-screen flex justify-center items-center ">
+          <div className='w-full md:max-w-2xl md:mx-auto bg-[#F0F9FF] backdrop-blur-3xl rounded-3xl md:p-10  max-md:py-10 max-md:px-5 border border-white/20 shadow-lg'>
             <h2 className='text-center text-black font-bold text-3xl'>Complete Your Profile</h2>
 
             <form onSubmit={handleSubmit} className='my-4 flex flex-col gap-10'>

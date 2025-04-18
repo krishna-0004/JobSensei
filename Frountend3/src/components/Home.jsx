@@ -49,10 +49,10 @@ useGSAP(()=>{
                 <img src="/Images/logo.png" alt="jobsensei" className="w-32" />
               </div>
 
-              <Link to="/login" id='#log'><button className="px-10 py-2 font-bold text-white rounded-full border-2 border-violet-400 hover:bg-white/10 hover:backdrop-blur-3xl hover:text-shadow-white bg-[#0691FF] transition duration-150 ">Log In</button></Link>
+              <Link to="/login" id='#log'><button className="px-10 py-2 font-bold text-white rounded-full border-2 border-violet-400   bg-[#0691FF] transition duration-150 ">Log In</button></Link>
             </div>
 
-            <div className="h-[80vh] flex flex-col justify-center gap-4  w-1/2">
+            <div className="md:h-[80vh] flex flex-col justify-center gap-4 max-md:mt-20  md:w-1/2">
 
               <h1 className="text-6xl font-bold tracking-wider">JOB <span className="bg-[#00A3FF] bg-clip-text text-transparent ">Sensei</span></h1>
 
@@ -61,7 +61,7 @@ useGSAP(()=>{
               </p>
 
 
-              <Link to="/login" className="mt-20">
+              <Link to="/login" className="md:mt-20 mt-4">
                 <button
                   
                   className="px-10 py-2 font-bold text-xl text-white rounded-full border-2 border-violet-400 relative overflow-hidden z-10 hover:scale-110 transition duration-150"
@@ -75,7 +75,7 @@ useGSAP(()=>{
           </div>
         </div>
 
-        <div className="absolute bottom-0 right-0" >
+        <div className="absolute bottom-0 right-0 " >
           <img src="/Images/homebg.png" alt="" className="w-4xl" id='image' />
         </div>
       </section>
