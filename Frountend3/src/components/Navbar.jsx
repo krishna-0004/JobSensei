@@ -10,9 +10,9 @@ import {
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
-export default function Navbar({ userRole = "mantor" }) {
+export default function Navbar({ userRole = "intern" }) {
   return (
-    <section className="text-black w-1/6 font-RS p-6 m-2 md:h-[97vh] rounded-2xl bg-[#E8EAEE]">
+    <section className="text-black  font-RS p-6 m-2 md:h-[97vh] rounded-2xl bg-[#E8EAEE]">
       <nav className="flex flex-col justify-between gap-4">
         <div className="flex justify-start gap-6 items-center">
           <Menu />

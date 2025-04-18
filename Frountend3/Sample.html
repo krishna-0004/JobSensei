@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JobSensei - Smart Career Navigator for Tier-2/3 Cities</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .gradient-bg {
+            background: linear-gradient(135deg, #6b73ff 0%, #000dff 100%);
+        }
+        .skill-pill:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .job-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+        }
+        .course-card:hover .play-icon {
+            opacity: 1;
+            transform: scale(1.1);
+        }
+        .typewriter {
+            overflow: hidden;
+            border-right: .15em solid #4f46e5;
+            white-space: nowrap;
+            animation: typing 3.5s steps(40, end), blink-caret .75s step-end infinite;
+        }
+        @keyframes typing {
+            from { width: 0 }
+            to { width: 100% }
+        }
+        @keyframes blink-caret {
+            from, to { border-color: transparent }
+            50% { border-color: #4f46e5; }
+        }
+    </style>
+</head>
+<body class="font-sans bg-gray-50">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0 flex items-center">
+                        <i class="fas fa-robot text-indigo-600 text-2xl mr-2"></i>
+                        <span class="text-xl font-bold text-indigo-600">JobSensei</span>
+                    </div>
+                </div>
+                <div class="hidden md:ml-6 md:flex md:items-center md:space-x-8">
+                    <a href="#" class="text-gray-900 inline-flex items-center px-1 pt-1 border-b-2 border-indigo-500 text-sm font-medium">Home</a>
+                    <a href="#" class="text-gray-500 hover:text-gray-900 inline-flex items-center px-1 pt-1 border-b-2 border-transparent hover:border-gray-300 text-sm font-medium">Career Paths</a>
+                    <a href="#" class="text-gray-500 hover:text-gray-900 inline-flex items-center px-1 pt-1 border-b-2 border-transparent hover:border-gray-300 text-sm font-medium">Courses</a>
+                    <a href="#" class="text-gray-500 hover:text-gray-900 inline-flex items-center px-1 pt-1 border-b-2 border-transparent hover:border-gray-300 text-sm font-medium">Success Stories</a>
+                </div>
+                <div class="flex items-center">
+                    <button class="bg-indigo-600 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                        Sign In
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="gradient-bg text-white">
+        <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8 lg:py-24">
+            <div class="lg:grid lg:grid-cols-2 lg:gap-8 items-center">
+                <div class="">
+                    <h1 class="text-4xl font-extrabold tracking-tight sm:text-5xl lg:text-6xl mb-6">
+                        <span class="block typewriter">Your Smart Career Guide</span>
+                        <span class="block">For Tier-2 & 3 Cities</span>
+                    </h1>
+                    <p class="mt-3 max-w-3xl text-xl text-indigo-100">
+                        AI-powered career navigation that understands your local job market. Get personalized job recommendations and skill development paths.
+                    </p>
+                    <div class="mt-8 sm:flex">
+                        <div class="rounded-md shadow">
+                            <a href="#" class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-indigo-600 bg-white hover:bg-gray-50 md:py-4 md:text-lg md:px-10">
+                                Start Free Assessment
+                            </a>
+                        </div>
+                        <div class="mt-3 rounded-md shadow sm:mt-0 sm:ml-3">
+                            <a href="#" class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-indigo-500 bg-opacity-60 hover:bg-opacity-70 md:py-4 md:text-lg md:px-10">
+                                Watch Demo
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-12 relative lg:mt-0">
+                    <div class="relative mx-auto w-full rounded-lg shadow-lg overflow-hidden">
+                        <div class="absolute inset-0 bg-indigo-200 opacity-25"></div>
+                        <div class="relative px-6 py-8 bg-white rounded-lg">
+                            <div class="text-center mb-6">
+                                <h3 class="text-lg font-medium text-gray-900">AI Career Assessment</h3>
+                                <p class="mt-1 text-sm text-gray-500">Answer a few questions to get started</p>
+                            </div>
+                            <div class="space-y-4">
+                                <div>
+                                    <label for="location" class="block text-sm font-medium text-gray-700">Your City</label>
+                                    <select id="location" name="location" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
+                                        <option>Select your city</option>
+                                        <option>Jaipur</option>
+                                        <option>Indore</option>
+                                        <option>Coimbatore</option>
+                                        <option>Bhopal</option>
+                                        <option>Vijayawada</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label for="education" class="block text-sm font-medium text-gray-700">Highest Education</label>
+                                    <select id="education" name="education" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
+                                        <option>Select education level</option>
+                                        <option>High School</option>
+                                        <option>Diploma</option>
+                                        <option>Bachelor's Degree</option>
+                                        <option>Master's Degree</option>
+                                        <option>Other</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <button class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                                        Continue Assessment
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- How It Works -->
+    <div class="py-12 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="lg:text-center">
+                <h2 class="text-base text-indigo-600 font-semibold tracking-wide uppercase">Process</h2>
+                <p class="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl">
+                    How JobSensei Works
+                </p>
+                <p class="mt-4 max-w-2xl text-xl text-gray-500 lg:mx-auto">
+                    Our AI-powered platform guides you through every step of your career journey
+                </p>
+            </div>
+
+            <div class="mt-10">
+                <div class="space-y-10 md:space-y-0 md:grid md:grid-cols-3 md:gap-x-8 md:gap-y-10">
+                    <div class="relative">
+                        <div class="absolute flex items-center justify-center h-12 w-12 rounded-md bg-indigo-500 text-white">
+                            <span class="text-xl font-bold">1</span>
+                        </div>
+                        <div class="ml-16">
+                            <h3 class="text-lg leading-6 font-medium text-gray-900">Skill Assessment</h3>
+                            <p class="mt-2 text-base text-gray-500">
+                                Our AI analyzes your current skills, education, and experience through an interactive assessment.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="relative">
+                        <div class="absolute flex items-center justify-center h-12 w-12 rounded-md bg-indigo-500 text-white">
+                            <span class="text-xl font-bold">2</span>
+                        </div>
+                        <div class="ml-16">
+                            <h3 class="text-lg leading-6 font-medium text-gray-900">Localized Job Matching</h3>
+                            <p class="mt-2 text-base text-gray-500">
+                                We match you with opportunities in your city, considering local market trends and requirements.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="relative">
+                        <div class="absolute flex items-center justify-center h-12 w-12 rounded-md bg-indigo-500 text-white">
+                            <span class="text-xl font-bold">3</span>
+                        </div>
+                        <div class="ml-16">
+                            <h3 class="text-lg leading-6 font-medium text-gray-900">Personalized Learning</h3>
+                            <p class="mt-2 text-base text-gray-500">
+                                Get curated course recommendations to bridge skill gaps and boost your employability.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Skill Analysis -->
+    <div class="py-12 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="lg:text-center mb-12">
+                <h2 class="text-base text-indigo-600 font-semibold tracking-wide uppercase">Analysis</h2>
+                <p class="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl">
+                    AI-Powered Skill Analysis
+                </p>
+                <p class="mt-4 max-w-2xl text-xl text-gray-500 lg:mx-auto">
+                    Discover your strengths and areas for improvement with our advanced analysis
+                </p>
+            </div>
+            
+            <div class="bg-white shadow rounded-lg p-6">
+                <div class="flex justify-between items-center mb-6">
+                    <h3 class="text-lg font-medium text-gray-900">Your Skill Profile</h3>
+                    <span class="px-3 py-1 bg-green-100 text-green-800 text-xs font-medium rounded-full">Intermediate</span>
+                </div>
+                
+                <div class="mb-8">
+                    <h4 class="text-sm font-medium text-gray-500 mb-3">Technical Skills</h4>
+                    <div class="flex flex-wrap gap-2">
+                        <div class="skill-pill px-3 py-1 bg-blue-100 text-blue-800 text-sm font-medium rounded-full transition duration-300">
+                            MS Office <span class="font-bold">75%</span>
+                        </div>
+                        <div class="skill-pill px-3 py-1 bg-blue-100 text-blue-800 text-sm font-medium rounded-full transition duration-300">
+                            Basic Accounting <span class="font-bold">68%</span>
+                        </div>
+                        <div class="skill-pill px-3 py-1 bg-blue-100 text-blue-800 text-sm font-medium rounded-full transition duration-300">
+                            Digital Marketing <span class="font-bold">52%</span>
+                        </div>
+                        <div class="skill-pill px-3 py-1 bg-yellow-100 text-yellow-800 text-sm font-medium rounded-full transition duration-300">
+                            Web Development <span class="font-bold">42%</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="mb-8">
+                    <h4 class="text-sm font-medium text-gray-500 mb-3">Soft Skills</h4>
+                    <div class="flex flex-wrap gap-2">
+                        <div class="skill-pill px-3 py-1 bg-green-100 text-green-800 text-sm font-medium rounded-full transition duration-300">
+                            Communication <span class="font-bold">80%</span>
+                        </div>
+                        <div class="skill-pill px-3 py-1 bg-green-100 text-green-800 text-sm font-medium rounded-full transition duration-300">
+                            Teamwork <span class="font-bold">75%</span>
+                        </div>
+                        <div class="skill-pill px-3 py-1 bg-yellow-100 text-yellow-800 text-sm font-medium rounded-full transition duration-300">
+                            Leadership <span class="font-bold">45%</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="mb-6">
+                    <h4 class="text-sm font-medium text-gray-500 mb-3">Skill Gap Analysis</h4>
+                    <div class="space-y-3">
+                        <div>
+                            <div class="flex justify-between text-sm mb-1">
+                                <span>Data Analysis (needed for 68% of jobs in your area)</span>
+                                <span class="font-medium">-35% gap</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2.5">
+                                <div class="bg-red-500 h-2.5 rounded-full" style="width: 35%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between text-sm mb-1">
+                                <span>Customer Service (needed for 52% of jobs in your area)</span>
+                                <span class="font-medium">-20% gap</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2.5">
+                                <div class="bg-yellow-500 h-2.5 rounded-full" style="width: 20%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <button class="w-full mt-6 bg-indigo-600 text-white py-2 px-4 rounded-md hover:bg-indigo-700 transition duration-300">
+                    Improve These Skills
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Job Recommendations -->
+    <div class="py-12 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="lg:text-center mb-12">
+                <h2 class="text-base text-indigo-600 font-semibold tracking-wide uppercase">Opportunities</h2>
+                <p class="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl">
+                    Local Job Recommendations
+                </p>
+                <p class="mt-4 max-w-2xl text-xl text-gray-500 lg:mx-auto">
+                    Curated opportunities matching your profile and local market needs
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Job Card 1 -->
+                <div class="job-card bg-white border border-gray-200 rounded-lg shadow-sm overflow-hidden transition duration-300 hover:shadow-md">
+                    <div class="p-6">
+                        <div class="flex items-center mb-4">
+                            <div class="flex-shrink-0 bg-indigo-100 p-3 rounded-lg">
+                                <i class="fas fa-chart-line text-indigo-600 text-xl"></i>
+                            </div>
+                            <div class="ml-4">
+                                <h3 class="text-lg font-medium text-gray-900">Sales Executive</h3>
+                                <p class="text-sm text-gray-500">Local Retail Chain</p>
+                            </div>
+                        </div>
+                        <div class="mb-4">
+                            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                                <i class="fas fa-map-marker-alt mr-1"></i> 5km from you
+                            </span>
+                            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800 ml-2">
+                                ₹15k - ₹20k/month
+                            </span>
+                        </div>
+                        <p class="text-gray-600 text-sm mb-4">
+                            Looking for dynamic individuals with good communication skills to handle customer inquiries and drive sales.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="px-2 py-1 bg-gray-100 text-gray-800 text-xs rounded">Communication</span>
+                            <span class="px-2 py-1 bg-gray-100 text-gray-800 text-xs rounded">Sales</span>
+                            <span class="px-2 py-1 bg-gray-100 text-gray-800 text-xs rounded">Customer Service</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-xs text-gray-500">Match: 82%</span>
+                            <button class="text-sm font-medium text-indigo-600 hover:text-indigo-500">
+                                View Details <i class="fas fa-chevron-right ml-1"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Job Card 2 -->
+                <div class="job-card bg-white border border-gray-200 rounded-lg shadow-sm overflow-hidden transition duration-300 hover:shadow-md">
+                    <div class="p-6">
+                        <div class="flex items-center mb-4">
+                            <div class="flex-shrink-0 bg-blue-100 p-3 rounded-lg">
+                                <i class="fas fa-laptop-code text-blue-600 text-xl"></i>
+                            </div>
+                            <div class="ml-4">
+                                <h3 class="text-lg font-medium text-gray-900">Junior Web Developer</h3>
+                                <p class="text-sm text-gray-500">Digital Agency</p>
+                            </div>
+                        </div>
+                        <div class="mb-4">
+                            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                                <i class="fas fa-map-marker-alt mr-1"></i> 8km from you
+                            </span>
+                            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800 ml-2">
+                                ₹18k - ₹25k/month
+                            </span>
+                        </div>
+                        <p class="text-gray-600 text-sm mb-4">
+                            Entry-level position for candidates with basic HTML, CSS knowledge. On-the-job training provided.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="px-2 py-1 bg-gray-100 text-gray-800 text-xs rounded">HTML</span>
+                            <span class="px-2 py-1 bg-gray-100 text-gray-800 text-xs rounded">CSS</span>
+                            <span class="px-2 py-1 bg-gray-100 text-gray-800 text-xs rounded">JavaScript</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-xs text-gray-500">Match: 76%</span>
+                            <button class="text-sm font-medium text-indigo-600 hover:text-indigo-500">
+                                View Details <i class="fas fa-chevron-right ml-1"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Job Card 3 -->
+                <div class="job-card bg-white border border-gray-200 rounded-lg shadow-sm overflow-hidden transition duration-300 hover:shadow-md">
+                    <div class="p-6">
+                        <div class="flex items-center mb-4">
+                            <div class="flex-shrink-0 bg-purple-100 p-3 rounded-lg">
+                                <i class="fas fa-book text-purple-600 text-xl"></i>
+                            </div>
+                            <div class="ml-4">
+                                <h3 class="text-lg font-medium text-gray-900">Content Writer</h3>
+                                <p class="text-sm text-gray-500">Education Startup</p>
+                            </div>
+                        </div>
+                        <div class="mb-4">
+                            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                                <i class="fas fa-map-marker-alt mr-1"></i> Remote
+                            </span>
+                            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800 ml-2">
+                                ₹12k - ₹18k/month
+                            </span>
+                        </div>
+                        <p class="text-gray-600 text-sm mb-4">
+                            Create educational content in local language. Freshers with good writing skills can apply.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="px-2 py-1 bg-gray-100 text-gray-800 text-xs rounded">Writing</span>
+                            <span class="px-2 py-1 bg-gray-100 text-gray-800 text-xs rounded">Research</span>
+                            <span class="px-2 py-1 bg-gray-100 text-gray-800 text-xs rounded">Local Language</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-xs text-gray-500">Match: 88%</span>
+                            <button class="text-sm font-medium text-indigo-600 hover:text-indigo-500">
+                                View Details <i class="fas fa-chevron-right ml-1"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-10 text-center">
+                <button class="px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700">
+                    View All Recommendations
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Course Recommendations -->
+    <div class="py-12 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="lg:text-center mb-12">
+                <h2 class="text-base text-indigo-600 font-semibold tracking-wide uppercase">Learning</h2>
+                <p class="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl">
+                    Skill-Building Courses
+                </p>
+                <p class="mt-4 max-w-2xl text-xl text-gray-500 lg:mx-auto">
+                    Personalized recommendations to bridge your skill gaps
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Course Card 1 -->
+                <div class="course-card bg-white rounded-lg shadow-sm overflow-hidden transition duration-300 hover:shadow-md">
+                    <div class="relative">
+                        <img src="https://images.unsplash.com/photo-1499750310107-5fef28a66643?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Excel Course" class="w-full h-40 object-cover">
+                        <div class="absolute inset-0 bg-black bg-opacity-20 flex items-center justify-center">
+                            <div class="play-icon opacity-0 transition duration-300 transform">
+                                <i class="fas fa-play text-white text-4xl"></i>
+                            </div>
+                        </div>
+                        <div class="absolute top-2 right-2 bg-yellow-500 text-white text-xs font-bold px-2 py-1 rounded">
+                            Free
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-lg font-medium text-gray-900 mb-2">Advanced Excel for Business</h3>
+                        <p class="text-sm text-gray-500 mb-4">By Local Training Institute</p>
+                        <div class="flex items-center text-sm text-gray-500 mb-4">
+                            <i class="fas fa-clock mr-2"></i> 12 hours
+                            <i class="fas fa-user-graduate ml-4 mr-2"></i> 1.2k+ learners
+                        </div>
+                        <div class="mb-4">
+                            <div class="flex justify-between text-sm mb-1">
+                                <span>Course Progress</span>
+                                <span>0%</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2">
+                                <div class="bg-indigo-600 h-2 rounded-full" style="width: 0%"></div>
+                            </div>
+                        </div>
+                        <button class="w-full mt-2 bg-indigo-600 text-white py-2 px-4 rounded-md hover:bg-indigo-700 transition duration-300">
+                            Start Learning
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Course Card 2 -->
+                <div class="course-card bg-white rounded-lg shadow-sm overflow-hidden transition duration-300 hover:shadow-md">
+                    <div class="relative">
+                        <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Digital Marketing" class="w-full h-40 object-cover">
+                        <div class="absolute inset-0 bg-black bg-opacity-20 flex items-center justify-center">
+                            <div class="play-icon opacity-0 transition duration-300 transform">
+                                <i class="fas fa-play text-white text-4xl"></i>
+                            </div>
+                        </div>
+                        <div class="absolute top-2 right-2 bg-green-500 text-white text-xs font-bold px-2 py-1 rounded">
+                            Popular
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-lg font-medium text-gray-900 mb-2">Digital Marketing Fundamentals</h3>
+                        <p class="text-sm text-gray-500 mb-4">By Google Digital Unlocked</p>
+                        <div class="flex items-center text-sm text-gray-500 mb-4">
+                            <i class="fas fa-clock mr-2"></i> 20 hours
+                            <i class="fas fa-user-graduate ml-4 mr-2"></i> 5.7k+ learners
+                        </div>
+                        <div class="mb-4">
+                            <div class="flex justify-between text-sm mb-1">
+                                <span>Course Progress</span>
+                                <span>0%</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2">
+                                <div class="bg-indigo-600 h-2 rounded-full" style="width: 0%"></div>
+                            </div>
+                        </div>
+                        <button class="w-full mt-2 bg-indigo-600 text-white py-2 px-4 rounded-md hover:bg-indigo-700 transition duration-300">
+                            Start Learning
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Course Card 3 -->
+                <div class="course-card bg-white rounded-lg shadow-sm overflow-hidden transition duration-300 hover:shadow-md">
+                    <div class="relative">
+                        <img src="https://images.unsplash.com/photo-1547658719-da2b51169166?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Web Development" class="w-full h-40 object-cover">
+                        <div class="absolute inset-0 bg-black bg-opacity-20 flex items-center justify-center">
+                            <div class="play-icon opacity-0 transition duration-300 transform">
+                                <i class="fas fa-play text-white text-4xl"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-lg font-medium text-gray-900 mb-2">Web Development Bootcamp</h3>
+                        <p class="text-sm text-gray-500 mb-4">By Local Coding Academy</p>
+                        <div class="flex items-center text-sm text-gray-500 mb-4">
+                            <i class="fas fa-clock mr-2"></i> 60 hours
+                            <i class="fas fa-user-graduate ml-4 mr-2"></i> 890+ learners
+                        </div>
+                        <div class="mb-4">
+                            <div class="flex justify-between text-sm mb-1">
+                                <span>Course Progress</span>
+                                <span>0%</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2">
+                                <div class="bg-indigo-600 h-2 rounded-full" style="width: 0%"></div>
+                            </div>
+                        </div>
+                        <button class="w-full mt-2 bg-indigo-600 text-white py-2 px-4 rounded-md hover:bg-indigo-700 transition duration-300">
+                            Start Learning
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-10 text-center">
+                <button class="px-6 py-3 border border-transparent text-base font-medium rounded-md text-indigo-700 bg-indigo-100 hover:bg-indigo-200">
+                    Browse All Courses
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Success Stories -->
+    <div class="py-12 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="lg:text-center mb-12">
+                <h2 class="text-base text-indigo-600 font-semibold tracking-wide uppercase">Testimonials</h2>
+                <p class="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl">
+                    Success Stories From Your City
+                </p>
+                <p class="mt-4 max-w-2xl text-xl text-gray-500 lg:mx-auto">
+                    Real people who transformed their careers with JobSensei
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Testimonial 1 -->
+                <div class="bg-gray-50 p-6 rounded-lg">
+                    <div class="flex items-center mb-4">
+                        <img class="w-12 h-12 rounded-full object-cover" src="https://randomuser.me/api/portraits/women/44.jpg" alt="Priya K.">
+                        <div class="ml-4">
+                            <h4 class="text-lg font-medium text-gray-900">Priya K.</h4>
+                            <p class="text-gray-500">Sales Executive, Jaipur</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 italic mb-4">
+                        "JobSensei helped me identify my communication skills and matched me with perfect local opportunities. I went from unemployed to earning ₹18k/month in just 2 months!"
+                    </p>
+                    <div class="flex items-center text-sm text-gray-500">
+                        <i class="fas fa-star text-yellow-400 mr-1"></i>
+                        <i class="fas fa-star text-yellow-400 mr-1"></i>
+                        <i class="fas fa-star text-yellow-400 mr-1"></i>
+                        <i class="fas fa-star text-yellow-400 mr-1"></i>
+                        <i class="fas fa-star text-yellow-400 mr-1"></i>
+                        <span class="ml-2">5.0</span>
+                    </div>
+                </div>
+                
+                <!-- Testimonial 2 -->
+                <div class="bg-gray-50 p-6 rounded-lg">
+                    <div class="flex items-center mb-4">
+                        <img class="w-12 h-12 rounded-full object-cover" src="https://randomuser.me/api/portraits/men/32.jpg" alt="Rahul S.">
+                        <div class="ml-4">
+                            <h4 class="text-lg font-medium text-gray-900">Rahul S.</h4>
+                            <p class="text-gray-500">Junior Developer, Indore</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 italic mb-4">
+                        "The AI suggested I learn web development based on my aptitude. The recommended courses were affordable and local. Now I have a stable job with growth potential."
+                    </p>
+                    <div class="flex items-center text-sm text-gray-500">
+                        <i class="fas fa-star text-yellow-400 mr-1"></i>
+                        <i class="fas fa-star text-yellow-400 mr-1"></i>
+                        <i class="fas fa-star text-yellow-400 mr-1"></i>
+                        <i class="fas fa-star text-yellow-400 mr-1"></i>
+                        <i class="fas fa-star text-yellow-400 mr-1"></i>
+                        <span class="ml-2">5.0</span>
+                    </div>
+                </div>
+                
+                <!-- Testimonial 3 -->
+                <div class="bg-gray-50 p-6 rounded-lg">
+                    <div class="flex items-center mb-4">
+                        <img class="w-12 h-12 rounded-full object-cover" src="https://randomuser.me/api/portraits/women/68.jpg" alt="Ananya P.">
+                        <div class="ml-4">
+                            <h4 class="text-lg font-medium text-gray-900">Ananya P.</h4>
+                            <p class="text-gray-500">Content Writer, Coimbatore</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 italic mb-4">
+                        "As a graduate with no work experience, JobSensei's assessment highlighted my writing skills. The platform connected me with remote work opportunities I never knew existed."
+                    </p>
+                    <div class="flex items-center text-sm text-gray-500">
+                        <i class="fas fa-star text-yellow-400 mr-1"></i>
+                        <i class="fas fa-star text-yellow-400 mr-1"></i>
+                        <i class="fas fa-star text-yellow-400 mr-1"></i>
+                        <i class="fas fa-star text-yellow-400 mr-1"></i>
+                        <i class="fas fa-star-half-alt text-yellow-400 mr-1"></i>
+                        <span class="ml-2">4.5</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CTA Section -->
+    <div class="gradient-bg">
+        <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8 lg:py-24">
+            <div class="lg:grid lg:grid-cols-2 lg:gap-8 lg:items-center">
+                <div>
+                    <h2 class="text-3xl font-extrabold tracking-tight text-white sm:text-4xl">
+                        Ready to transform your career?
+                    </h2>
+                    <p class="mt-3 max-w-3xl text-lg leading-6 text-indigo-200">
+                        Join thousands from tier-2 and tier-3 cities who found better opportunities with JobSensei's AI-powered guidance.
+                    </p>
+                </div>
+                <div class="mt-8 lg:mt-0">
+                    <div class="inline-flex rounded-md shadow">
+                        <a href="#" class="inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-indigo-600 bg-white hover:bg-gray-50">
+                            Start Free Assessment
+                            <i class="fas fa-arrow-right ml-3"></i>
+                        </a>
+                    </div>
+                    <div class="ml-3 inline-flex">
+                        <a href="#" class="inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-white bg-indigo-500 bg-opacity-60 hover:bg-opacity-70">
+                            How it works
+                            <i class="fas fa-play-circle ml-3"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800">
+        <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-sm font-semibold text-gray-300 tracking-wider uppercase">JobSensei</h3>
+                    <ul class="mt-4 space-y-4">
+                        <li><a href="#" class="text-base text-gray-400 hover:text-white">About Us</a></li>
+                        <li><a href="#" class="text-base text-gray-400 hover:text-white">Careers</a></li>
+                        <li><a href="#" class="text-base text-gray-400 hover:text-white">Privacy Policy</a></li>
+                        <li><a href="#" class="text-base text-gray-400 hover:text-white">Terms of Service</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-sm font-semibold text-gray-300 tracking-wider uppercase">Resources</h3>
+                    <ul class="mt-4 space-y-4">
+                        <li><a href="#" class="text-base text-gray-400 hover:text-white">Career Guides</a></li>
+                        <li><a href="#" class="text-base text-gray-400 hover:text-white">Skill Tests</a></li>
+                        <li><a href="#" class="text-base text-gray-400 hover:text-white">Salary Calculator</a></li>
+                        <li><a href="#" class="text-base text-gray-400 hover:text-white">Interview Prep</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-sm font-semibold text-gray-300 tracking-wider uppercase">Support</h3>
+                    <ul class="mt-4 space-y-4">
+                        <li><a href="#" class="text-base text-gray-400 hover:text-white">Help Center</a></li>
+                        <li><a href="#" class="text-base text-gray-400 hover:text-white">Contact Us</a></li>
+                        <li><a href="#" class="text-base text-gray-400 hover:text-white">FAQs</a></li>
+                        <li><a href="#" class="text-base text-gray-400 hover:text-white">Community</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-sm font-semibold text-gray-300 tracking-wider uppercase">Connect With Us</h3>
+                    <div class="mt-4 flex space-x-6">
+                        <a href="#" class="text-gray-400 hover:text-white">
+                            <i class="fab fa-facebook-f text-lg"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white">
+                            <i class="fab fa-twitter text-lg"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white">
+                            <i class="fab fa-linkedin-in text-lg"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white">
+                            <i class="fab fa-youtube text-lg"></i>
+                        </a>
+                    </div>
+                    <div class="mt-6">
+                        <h4 class="text-sm font-semibold text-gray-300 tracking-wider uppercase">Download App</h4>
+                        <div class="mt-4 flex space-x-4">
+                            <a href="#" class="flex items-center justify-center px-3 py-2 border border-gray-600 rounded-md text-gray-300 hover:bg-gray-700">
+                                <i class="fab fa-google-play mr-2"></i>
+                                <span class="text-xs">Google Play</span>
+                            </a>
+                            <a href="#" class="flex items-center justify-center px-3 py-2 border border-gray-600 rounded-md text-gray-300 hover:bg-gray-700">
+                                <i class="fab fa-apple mr-2"></i>
+                                <span class="text-xs">App Store</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-12 border-t border-gray-700 pt-8">
+                <p class="text-base text-gray-400 text-center">
+                    &copy; 2023 JobSensei. All rights reserved. Designed for tier-2 and tier-3 city job seekers.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Simple interactive elements
+        document.addEventListener('DOMContentLoaded', function() {
+            // Skill pills click effect
+            const skillPills = document.querySelectorAll('.skill-pill');
+            skillPills.forEach(pill => {
+                pill.addEventListener('click', function() {
+                    this.classList.toggle('ring-2');
+                    this.classList.toggle('ring-indigo-500');
+                });
+            });
+            
+            // Job cards click effect
+            const jobCards = document.querySelectorAll('.job-card');
+            jobCards.forEach(card => {
+                card.addEventListener('click', function() {
+                    // In a real app, this would navigate to job details
+                    console.log('Job card clicked');
+                });
+            });
+            
+            // Course cards click effect
+            const courseCards = document.querySelectorAll('.course-card');
+            courseCards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    const playIcon = this.querySelector('.play-icon');
+                    if (playIcon) playIcon.classList.add('opacity-100');
+                });
+                card.addEventListener('mouseleave', function() {
+                    const playIcon = this.querySelector('.play-icon');
+                    if (playIcon) playIcon.classList.remove('opacity-100');
+                });
+            });
+            
+            // Typewriter effect
+            setTimeout(() => {
+                const typewriter = document.querySelector('.typewriter');
+                if (typewriter) {
+                    typewriter.style.animation = 'none';
+                    typewriter.style.borderRight = 'none';
+                    void typewriter.offsetWidth; // Trigger reflow
+                    typewriter.style.animation = null;
+                }
+            }, 3500);
+        });
+    </script>
+</body>
+</html>

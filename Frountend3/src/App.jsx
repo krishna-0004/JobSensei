@@ -15,7 +15,7 @@ import RecruiterForm from './components/Onboarding/RecruiterForm';
 import PendingPage from './components/Onboarding/PendingPage';
 
 import ProtectedRoute from './utils/ProtectedRoute';
-// Assuming this is already created
+
 import './App.css'
 import MentorProfile from './components/Profile/MentorProfile';
 import InternProfile from './components/Profile/InternProfile';
@@ -23,24 +23,22 @@ import RecruiterProfile from './components/Profile/RecruiterProfile';
 
 function App() {
   const location = useLocation();
+
   const hideNavAndFooterRoutes = ['/', '/login', '/common-profile', '/select-role', '/mentor-from', '/recruiter-form', '/mentor-pending'];
-
-
+  const shouldShowNavbar = !hideNavAndFooterRoutes.includes(location.pathname);
 
   return (
-
-
-    <>
-
-      <section>
-        <div className=" ">
-
-          <div className="">
-          {!hideNavAndFooterRoutes.includes(location.pathname) && <Navbar />}
+    <section className="min-h-screen w-full bg-[#f6f7f9] font-RS">
+      <div className={`flex ${shouldShowNavbar ? 'flex-row' : 'flex-col'} w-full`}>
+        
+        {shouldShowNavbar && (
+          <div className="w-[16.6%] min-w-[240px]">
+            <Navbar />
           </div>
+        )}
 
-
-          <Routes className="">
+        <div className={`flex-1 `}>
+          <Routes>
 
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<Login />} />
@@ -53,9 +51,7 @@ function App() {
             <Route path="/recruiter-form" element={<RecruiterForm />} />
             <Route path="/pending" element={<PendingPage />} />
 
-
-
-            {/* Protected dashboards by role */}
+            {/* Dashboards */}
             <Route
               path="/admin"
               element={
@@ -64,7 +60,6 @@ function App() {
                 </ProtectedRoute>
               }
             />
-
             <Route
               path="/intan"
               element={
@@ -90,23 +85,15 @@ function App() {
               }
             />
 
-
             {/* Profiles */}
             <Route path='/Mentor-Profile' element={<MentorProfile />} />
             <Route path='/Intern-Profile' element={<InternProfile />} />
             <Route path='/Recrut-Profile' element={<RecruiterProfile />} />
 
-
-
-
-
           </Routes>
-
         </div>
-      </section>
-
-    </>
-
+      </div>
+    </section>
   );
 }
 
