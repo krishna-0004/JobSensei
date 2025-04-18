@@ -69,7 +69,7 @@ function App() {
               }
             />
             <Route
-              path="/mentor-dashboard"
+              path="/mentor"
               element={
                 <ProtectedRoute allowedRole="mentor">
                   <MentorDashboard />
