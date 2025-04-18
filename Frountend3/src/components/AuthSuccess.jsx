@@ -1,8 +1,9 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const AuthSuccess = () => {
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(true);
 
   const saveToken = (token) => {
     localStorage.setItem('token', token);
@@ -28,59 +29,67 @@ const AuthSuccess = () => {
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
     const tokenFromUrl = urlParams.get('token');
+    if (tokenFromUrl) saveToken(tokenFromUrl);
 
-    console.log("🔍 Token from URL:", tokenFromUrl);
-
-    if (tokenFromUrl) {
-      saveToken(tokenFromUrl); // Save immediately
-    }
-
-    // Always get from localStorage (persistent)
     const token = tokenFromUrl || localStorage.getItem('token');
-
     if (!token) {
-      console.warn("⚠️ No token available anywhere");
+      console.warn("⚠️ No token found");
       navigate('/login');
       return;
     }
 
     const user = decodeJwt(token);
-
     if (!user) {
-      console.warn("⚠️ Token decoding failed");
+      console.warn("⚠️ Token decode failed");
       navigate('/login');
       return;
     }
 
-    console.log('✅ Decoded user:', user);
-
     const email = user.email?.trim().toLowerCase();
     const role = user.role?.trim().toLowerCase();
+    const userId = user.id;
 
     if (email === 'krishnakadukar0004@gmail.com') {
-      console.log("🔐 Admin detected, redirecting to /admin");
       navigate('/admin');
       return;
     }
 
-    switch (role) {
-      case 'intan':
-      case 'mentor':
-      case 'recruiter':
-        console.log(`🚀 Redirecting to /common-profile for role: ${role}`);
-        navigate('/common-profile');
-        break;
-      default:
-        console.warn("❓ Unknown role, going to home");
-        navigate('/');
-    }
+    // 🔁 Get fresh data from backend
+    fetch(`http://localhost:4000/user/${userId}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (!data || data.error) {
+          console.error('❌ Failed to fetch user info', data.error);
+          navigate('/login');
+          return;
+        }
+
+        console.log('📦 Fetched user:', data);
+
+        if (['intan', 'mentor', 'recruiter'].includes(data.role)) {
+          if (data.isApproved) {
+            navigate(`/${data.role}`);
+          } else {
+            navigate('/common-profile');
+          }
+        } else {
+          navigate('/');
+        }
+      })
+      .catch((err) => {
+        console.error('❌ Fetch error:', err);
+        navigate('/login');
+      })
+      .finally(() => {
+        setLoading(false);
+      });
   }, [navigate]);
 
-  return (
-    <div>
-      <h2>Authentication successful. Redirecting...</h2>
-    </div>
-  );
+  return <div>{loading ? <h2>Loading user info...</h2> : <h2>Redirecting...</h2>}</div>;
 };
 
 export default AuthSuccess;

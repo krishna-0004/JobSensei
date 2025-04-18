@@ -7,6 +7,7 @@ import {
   submitMentorDetails,
   approveUser,
   getPendingUsers,
+  getUserById
 } from '../controllers/userController.mjs';
 
 const router = express.Router();
@@ -17,5 +18,6 @@ router.put('/recruiter-form', authenticateJWT, submitRecruiterDetails);
 router.put('/mentor-form', authenticateJWT, submitMentorDetails);
 router.put('/admin/approve/:userId', authenticateJWT, approveUser);
 router.get('/admin/pending', authenticateJWT, getPendingUsers);
+router.get('/:id',getUserById);
 
 export default router;
