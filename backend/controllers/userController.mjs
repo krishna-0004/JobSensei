@@ -110,7 +110,6 @@ export const submitMentorDetails = async (req, res) => {
       currentPosition,
       company,
       certifications,
-      portfolioUrl,
       isMentorSubmitted
     } = req.body.mentorDetails || {}; // ✅ Extract from nested object
 
@@ -126,7 +125,6 @@ export const submitMentorDetails = async (req, res) => {
       currentPosition,
       company,
       certifications,
-      portfolioUrl,
       isMentorSubmitted: isMentorSubmitted ?? true,
     };
 
@@ -215,5 +213,22 @@ export const getUserById = async (req, res) => {
     res.json(user);
   } catch (err) {
     res.status(500).json({ error: 'Server error' });
+  }
+};
+
+export const uploadAvatar = async (req, res) => {
+  try {
+    const userId = req.user.id;
+    const user = await User.findById(userId);
+
+    if (!user) return res.status(404).json({ message: 'User not found' });
+
+    user.avatar = req.file.path; // Cloudinary image URL
+    await user.save();
+
+    res.status(200).json({ message: 'Avatar uploaded', avatarUrl: user.avatar });
+  } catch (error) {
+    console.error('Upload avatar error:', error);
+    res.status(500).json({ message: 'Server error' });
   }
 };

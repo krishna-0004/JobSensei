@@ -7,8 +7,10 @@ import {
   submitMentorDetails,
   approveUser,
   getPendingUsers,
-  getUserById
+  getUserById,
+  uploadAvatar
 } from '../controllers/userController.mjs';
+import upload from '../middleware/upload.mjs';
 
 const router = express.Router();
 
@@ -19,5 +21,6 @@ router.put('/mentor-form', authenticateJWT, submitMentorDetails);
 router.put('/admin/approve/:userId', authenticateJWT, approveUser);
 router.get('/admin/pending', authenticateJWT, getPendingUsers);
 router.get('/:id',getUserById);
+router.put('/upload-avatar', authenticateJWT, upload.single('avatar'), uploadAvatar);
 
 export default router;

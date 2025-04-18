@@ -11,7 +11,6 @@ const MentorForm = () => {
     currentPosition: '',
     company: '',
     certifications: '',
-    portfolioUrl: '',
   });
 
   const navigate = useNavigate();
@@ -69,7 +68,6 @@ const MentorForm = () => {
           <InputField icon={<Briefcase />} placeholder="Current Position" name="currentPosition" value={formData.currentPosition} onChange={handleChange} />
           <InputField icon={<Briefcase />} placeholder="Company" name="company" value={formData.company} onChange={handleChange} />
           <InputField icon={<FileText />} placeholder="Certifications (comma separated)" name="certifications" value={formData.certifications} onChange={handleChange} />
-          <InputField icon={<Globe />} placeholder="Portfolio URL" name="portfolioUrl" value={formData.portfolioUrl} onChange={handleChange} />
         </div>
 
         <button
