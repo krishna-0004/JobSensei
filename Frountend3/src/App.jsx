@@ -43,7 +43,7 @@ function App() {
         {/* Role-specific Forms */}
         <Route path="/mentor-from" element={<MentorForm />} />
         <Route path="/recruiter-form" element={<RecruiterForm />} />
-        <Route path="/mentor-pending" element={<PendingPage />} />
+        <Route path="/pending" element={<PendingPage />} />
 
         {/* Protected dashboards by role */}
         <Route

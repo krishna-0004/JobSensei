@@ -38,7 +38,7 @@ const MentorForm = () => {
         },
       };
 
-      const response = await axios.put('http://localhost:4000/user/mentor-form', payload, {
+      const response = await axios.put(`${import.meta.env.VITE_BACKEND_URL}/user/mentor-form`, payload, {
         headers: {
           Authorization: `Bearer ${token}`,
           'Content-Type': 'application/json',
@@ -47,7 +47,7 @@ const MentorForm = () => {
 
       console.log('✅ Mentor form submitted:', response.data);
       alert('Form submitted for admin approval. You’ll be notified once approved.');
-      navigate('/mentor-pending');
+      navigate('/pending');
     } catch (error) {
       const message = error.response?.data?.message || error.message;
       console.error('❌ Submit error:', message);

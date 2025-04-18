@@ -5,7 +5,7 @@ import gsap from "gsap";
 
 const Login = () => {
   const handleGoogleLogin = () => {
-    window.location.href = 'http://localhost:4000/auth/google';
+    window.location.href = `${import.meta.env.VITE_BACKEND_URL}/auth/google`;
   };
   // const loginWithLinkedIn = () => window.open('http://localhost4000/auth/linkedin', '_self');
   // const loginWithGitHub = () => window.open('http://localhost:4000/auth/github', '_self');

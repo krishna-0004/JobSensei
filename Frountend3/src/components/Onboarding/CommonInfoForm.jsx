@@ -36,7 +36,7 @@ const CommonProfile = () => {
     e.preventDefault();
 
     try {
-      await axios.put('http://localhost:4000/user/common-info', {
+      await axios.put(`${import.meta.env.VITE_BACKEND_URL}/user/common-info`, {
         ...formData,
         skills: formData.skills.split(',').map((skill) => skill.trim()),
       }, {

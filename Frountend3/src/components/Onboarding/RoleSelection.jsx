@@ -18,7 +18,7 @@ const RoleSelectionPage = () => {
 
     try {
       const response = await axios.put(
-        'http://localhost:4000/user/select-role',
+        `${import.meta.env.VITE_BACKEND_URL}/user/select-role`,
         { role: selectedRole },
         {
           headers: {
