@@ -8,8 +8,7 @@ import {
   approveUser,
   getPendingUsers,
   getUserById,
-  uploadAvatar,
-  getMe
+  uploadAvatar
 } from '../controllers/userController.mjs';
 import upload from '../middleware/upload.mjs';
 
@@ -23,6 +22,6 @@ router.put('/admin/approve/:userId', authenticateJWT, approveUser);
 router.get('/admin/pending', authenticateJWT, getPendingUsers);
 router.get('/:id',getUserById);
 router.put('/upload-avatar', authenticateJWT, upload.single('avatar'), uploadAvatar);
-router.put('/me', verifyJWT, getMe);
+
 
 export default router;
