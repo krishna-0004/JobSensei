@@ -24,7 +24,7 @@ export default function Navbar({ userRole = "intern" }) {
       { to: "/Jobs", icon: <BriefcaseBusiness />, label: "Jobs" },
       { to: "/Intern-Profile", icon: <UserRoundPen />, label: "Profile" },
       { to: "/mentors", icon: <GraduationCap />, label: "Mentors" },
-      { to: "/mock", icon: <BookOpenCheck />, label: "Mock Interview" },
+      { to: "https://ai-mock-interview-ky9t.onrender.com", icon: <BookOpenCheck />, label: "Mock Interview" },
     ],
     mantor: [
       { to: "/dashboard", icon: <LayoutDashboard />, label: "Dashboard" },

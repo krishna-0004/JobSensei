@@ -124,16 +124,25 @@ export default function IntanProfile() {
   };
 
   return (
-    <section className="p-6 max-w-4xl mx-auto">
+    <section className="p-6 overflow-y-auto h-screen">
       <h2 className="text-2xl font-bold mb-4">Intan Profile</h2>
 
-      <div className="mb-4 flex items-center gap-4">
-        {avatar && <img src={avatar} alt="Avatar" className="w-24 h-24 rounded-full object-cover" />}
-        <input type="file" accept="image/*" onChange={handleFileChange} />
+      <div className="grid grid-cols-4 items-center">
+       <div className="">
+       {avatar && <img src={avatar} alt="Avatar" className="size-40 rounded-full object-cover" />}
+        {/* <input type="file" accept="image/*" onChange={handleFileChange} /> */}
         {preview && <img src={preview} alt="Preview" className="w-20 h-20 rounded object-cover" />}
+       </div>
+       <div className="col-span-3">
+       <div className="flex flex-col justify-center ">
+                  <p className="text-lg text-gray-600 grid grid-cols-4"><b className='justify-self-center'>Name:</b> {profile.name}</p>
+                  <p className="text-lg text-gray-600 grid grid-cols-4"><b className='justify-self-center'>Phone:</b> {profile.phone}</p>
+                  <p className="text-lg text-gray-600 grid grid-cols-4"><b className='justify-self-center'>Location:</b> {profile.location}</p>
+                </div>
+       </div>
       </div>
 
-      <div className="space-y-3">
+      <div className="space-y-3 mt-6">
         {editing ? (
           <>
             <input name="name" value={profile.name || ''} onChange={handleInputChange} className="input" placeholder="Name" />
@@ -150,7 +159,7 @@ export default function IntanProfile() {
               placeholder="Skills (comma separated)"
             />
             {/* Education */}
-            <h4 className="text-lg font-semibold mt-4">Education</h4>
+            <h4 className="text-lg mt-4">Educ6tion</h4>
             {(profile.education || []).map((edu, i) => (
               <div key={i} className="border p-3 rounded mb-3 space-y-2 bg-gray-50">
                 <input
@@ -189,7 +198,7 @@ export default function IntanProfile() {
                   onClick={() => deleteNestedItem('education', i)}
                   className="text-red-600 text-sm"
                 >
-                  🗑️ Delete
+                   Delete
                 </button>
               </div>
             ))}
@@ -209,7 +218,7 @@ export default function IntanProfile() {
             </button>
 
             {/* Awards & Certifications */}
-            <h4 className="text-lg font-semibold mt-4">Awards & Certifications</h4>
+            <h4 className="text-lg mt-4">Awar6s & Certifications</h4>
             {(profile.awardsAndCertifications || []).map((award, i) => (
               <div key={i} className="border p-3 rounded mb-3 space-y-2 bg-gray-50">
                 <input placeholder="Title" value={award.title} onChange={(e) => handleNestedChange(e, i, 'awardsAndCertifications', 'title')} className="input" />
@@ -218,7 +227,7 @@ export default function IntanProfile() {
                 <input placeholder="Credential URL" value={award.credentialUrl} onChange={(e) => handleNestedChange(e, i, 'awardsAndCertifications', 'credentialUrl')} className="input" />
                 {award.imageUrl && <img src={award.imageUrl} alt="Award" className="w-32 h-20 object-cover rounded" />}
                 <input type="file" accept="image/*" onChange={(e) => handleImageUploadForNested(e, 'awardsAndCertifications', i)} />
-                <button onClick={() => deleteNestedItem('awardsAndCertifications', i)} className="text-red-600 text-sm">🗑️ Delete</button>
+                <button onClick={() => deleteNestedItem('awardsAndCertifications', i)} className="text-red-600 text-sm"> Delete</button>
               </div>
             ))}
             <button onClick={() => addNestedItem('awardsAndCertifications', { title: '', issuer: '', year: '', credentialUrl: '', imageUrl: '' })} className="btn">
@@ -226,7 +235,7 @@ export default function IntanProfile() {
             </button>
 
             {/* Projects */}
-            <h4 className="text-lg font-semibold mt-4">Projects</h4>
+            <h4 className="text-lg mt-4">Proj6cts</h4>
             {(profile.projects || []).map((proj, i) => (
               <div key={i} className="border p-3 rounded mb-3 space-y-2 bg-gray-50">
                 <input placeholder="Name" value={proj.name} onChange={(e) => handleNestedChange(e, i, 'projects', 'name')} className="input" />
@@ -245,7 +254,7 @@ export default function IntanProfile() {
                 {proj.imageUrl && <img src={proj.imageUrl} alt="Project" className="w-32 h-20 object-cover rounded" />}
                 <input type="file" accept="image/*" onChange={(e) => handleImageUploadForNested(e, 'projects', i)} />
                 <button onClick={() => deleteNestedItem('projects', i)} className="text-red-600 hover:text-red-800 text-sm">
-                  🗑️ Delete
+                   Delete
                 </button>
               </div>
             ))}
@@ -255,18 +264,14 @@ export default function IntanProfile() {
           </>
         ) : (
           <>
-            <section className="bg-gray-100 p-8 rounded-lg shadow-xl max-w-4xl mx-auto">
+            <section className="bg-white p-8 rounded-lg shadow-xl  mx-auto">
               <h2 className="text-4xl font-extrabold text-center text-blue-700 mb-8">Intan Profile</h2>
 
               {/* Profile Header */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 mb-8">
+                
                 <div className="flex flex-col justify-center">
-                  <p className="text-2xl font-semibold text-gray-800"><b>Name:</b> {profile.name}</p>
-                  <p className="text-lg text-gray-600"><b>Phone:</b> {profile.phone}</p>
-                  <p className="text-lg text-gray-600"><b>Location:</b> {profile.location}</p>
-                </div>
-                <div className="flex flex-col justify-center">
-                  <p className="text-2xl font-semibold text-gray-800"><b>Gender:</b> {profile.gender}</p>
+                  <p className="text-lg text-gray-600"><b>Gender:</b> {profile.gender}</p>
                   <p className="text-lg text-gray-600"><b>Date of Birth:</b> {profile.dateOfBirth}</p>
                   <p className="text-lg text-gray-600"><b>Bio:</b> {profile.bio}</p>
                 </div>
@@ -274,15 +279,15 @@ export default function IntanProfile() {
 
               {/* Skills Section */}
               <div className="mb-8">
-                <p className="text-xl font-semibold text-gray-800"><b>Skills:</b> {(profile.skills || []).join(', ')}</p>
+                <p className="text-xl text-gray-600"><b>Skills:</b> {(profile.skills || []).join(', ')}</p>
               </div>
 
               {/* Awards & Certifications */}
               <div className="mb-12">
-                <h3 className="text-2xl font-semibold text-blue-600 mb-4">🏅 Awards & Certifications</h3>
+                <h3 className="text-2xl text-blue-600 mb-4">🏅 Awards & Certifications</h3>
                 {(profile.awardsAndCertifications || []).map((award, i) => (
                   <div key={i} className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 mb-6">
-                    <p className="text-lg font-semibold text-gray-800">
+                    <p className="text-lg text-gray-600">
                       <b>{award.title}</b> from <b>{award.issuer}</b>
                     </p>
                     <p className="text-sm text-gray-500">📅 {award.year} | <a href={award.credentialUrl} target="_blank" className="text-blue-600 hover:underline">Credential</a></p>
@@ -295,10 +300,10 @@ export default function IntanProfile() {
 
               {/* Education Section */}
               <div className="mb-12">
-                <h3 className="text-2xl font-semibold text-blue-600 mb-4">🎓 Education</h3>
+                <h3 className="text-2xl text-blue-600 mb-4">🎓 Education</h3>
                 {(profile.education || []).map((edu, i) => (
                   <div key={i} className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 mb-6">
-                    <p className="text-lg font-semibold text-gray-800">
+                    <p className="text-lg text-gray-600">
                       <b>{edu.degree}</b> in {edu.field} at <b>{edu.institution}</b>
                     </p>
                     <p className="text-sm text-gray-500">📆 {edu.startYear} - {edu.endYear}</p>
@@ -308,10 +313,10 @@ export default function IntanProfile() {
 
               {/* Projects Section */}
               <div className="mb-12">
-                <h3 className="text-2xl font-semibold text-blue-600 mb-4">💻 Projects</h3>
+                <h3 className="text-2xl text-blue-600 mb-4">💻 Projects</h3>
                 {(profile.projects || []).map((proj, i) => (
                   <div key={i} className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 mb-6">
-                    <p className="text-lg font-semibold text-gray-800">
+                    <p className="text-lg text-gray-600">
                       <b>{proj.name}</b>: {proj.description}
                     </p>
                     <p className="text-sm text-gray-500">Tech: {(proj.techStack || []).join(', ')}</p>

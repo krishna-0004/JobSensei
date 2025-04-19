@@ -31,11 +31,11 @@ const RoadmapSection = () => {
     <div className="p-6 mx-auto bg-white rounded-2xl shadow-md overflow-y-auto h-screen ">
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-6 gap-4">
         <h1 className="text-3xl font-extrabold text-gray-800">Learning Roadmap</h1>
-        
+
       </div>
 
       <div className="flex justify-center my-6">
-      <select
+        <select
           className="border  border-gray-300 rounded-md px-4 py-2 w-1/3 bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-400"
           value={selectedTopic}
           onChange={(e) => setSelectedTopic(e.target.value)}
@@ -46,6 +46,18 @@ const RoadmapSection = () => {
             </option>
           ))}
         </select>
+
+
+      </div>
+
+      <div className="flex justify-center items-center my-4">
+        <input
+          type="text"
+          placeholder="Enter Domain"
+          className="border-2 border-gray-500 px-6 py-2 rounded-xl"
+          value={selectedTopic}
+          onChange={(e) => setSelectedTopic(e.target.value)}
+        />
       </div>
 
       {loading ? (
@@ -64,9 +76,8 @@ const RoadmapSection = () => {
                 <li key={index} className="relative w-full flex justify-center items-center">
                   {/* Card container */}
                   <div
-                    className={`w-full sm:w-1/2 px-4 ${
-                      isLeft ? "ml-auto text-left" : "mr-auto text-right"
-                    }`}
+                    className={`w-full sm:w-1/2 px-4 ${isLeft ? "ml-auto text-left" : "mr-auto text-right"
+                      }`}
                   >
                     <div className="bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 p-5 rounded-xl shadow-md hover:shadow-xl transition transform animate-fade-up">
                       <h2 className="text-lg font-semibold text-gray-800">{item.title}</h2>

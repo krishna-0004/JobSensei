@@ -72,7 +72,7 @@ export default function IntanDashboard() {
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  <div className="min-w-[140px] h-40 bg-white rounded-2xl shadow hover:shadow-lg transition-all p-4 flex flex-col items-center gap-2">
+                  <div className="min-w-[140px] h-44 bg-white rounded-2xl shadow hover:shadow-lg transition-all p-4 flex flex-col items-center gap-2">
                     <div className="p-3 bg-gradient-to-br from-sky-300 to-sky-500 rounded-full">
                       <SquarePlay className="size-10 text-white" />
                     </div>
