@@ -8,6 +8,7 @@ import cors from 'cors';
 import './config/passport.mjs';
 import authRoutes from './routes/auth.mjs';
 import userRoutes from './routes/user.mjs';
+import jobRoutes from "./routes/job.mjs";
 
 dotenv.config();
 
@@ -26,6 +27,7 @@ app.use(passport.session());
 
 app.use('/auth', authRoutes);
 app.use('/user', userRoutes);
+app.use('/api', jobRoutes);
 
 mongoose.connect(process.env.MONGO_URI, {
 

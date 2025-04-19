@@ -4,20 +4,23 @@ backend/
 ├── .env
 │
 ├── models/
-│   └── User.mjs
+│   ├── User.mjs               # Existing User schema (includes recruiter jobs)
+│   └── Job.mjs                ✅ New: Job model (for dedicated job collection)
 │
 ├── routes/
 │   ├── auth.mjs
-│   └── user.mjs              ✅ Includes /upload-avatar route
+│   ├── user.mjs               # User-related routes
+│   └── job.mjs                ✅ New: Routes for job fetching/filtering
 │
 ├── controllers/
 │   ├── authController.mjs
-│   └── userController.mjs    ✅ Has uploadAvatar controller
+│   ├── userController.mjs
+│   └── jobController.mjs      ✅ New: Logic for fetching jobs from both collections
 │
 ├── config/
 │   ├── passport.mjs
-│   └── cloudinaryConfig.mjs  ✅ Cloudinary setup here
+│   └── cloudinaryConfig.mjs
 │
 ├── middleware/
 │   ├── jwt.mjs
-│   └── upload.mjs            ✅ Multer + Cloudinary storage setup
+│   └── upload.mjs
