@@ -8,7 +8,9 @@ import {
   approveUser,
   getPendingUsers,
   getUserById,
-  uploadAvatar
+  uploadAvatar,
+  getProfileById,
+  updateProfileById,
 } from '../controllers/userController.mjs';
 import upload from '../middleware/upload.mjs';
 
@@ -21,6 +23,8 @@ router.put('/mentor-form', authenticateJWT, submitMentorDetails);
 router.put('/admin/approve/:userId', authenticateJWT, approveUser);
 router.get('/admin/pending', authenticateJWT, getPendingUsers);
 router.get('/:id',getUserById);
+router.get('/profile/:id', getProfileById);           // get full profile by id
+router.put('/profile/:id', updateProfileById); 
 router.put('/upload-avatar', authenticateJWT, upload.single('avatar'), uploadAvatar);
 
 
