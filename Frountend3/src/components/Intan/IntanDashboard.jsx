@@ -32,7 +32,7 @@ export default function IntanDashboard() {
         const token = localStorage.getItem('token');
         const decoded = decodeJwt(token);
         if (!decoded || !decoded.id) return;
-  
+
         const res = await axios.get(`http://localhost:4000/user/profile/${decoded.id}`);
         setUser(res.data);
         setCourses(res.data.course_recommendations || []); // FIXED HERE
@@ -40,10 +40,10 @@ export default function IntanDashboard() {
         console.error('❌ Failed to fetch user or courses:', err);
       }
     };
-  
+
     fetchUserData();
   }, []);
-  
+
 
   return (
     <section className="p-4 bg-sky-50">
@@ -151,20 +151,44 @@ export default function IntanDashboard() {
             <div className="flex justify-between items-center mb-3">
               <div className="flex items-center gap-2 text-gray-700">
                 <Search />
-                <h1 className="font-semibold">Find Jobs</h1>
+                <h1 className="font-semibold">Recomended Jobs</h1>
               </div>
               <button className="text-xs bg-gray-200 hover:bg-gray-300 px-3 py-1 rounded-full">See All</button>
             </div>
 
-            <div className="flex flex-col gap-3">
-              {[{ name: "Google", img: "/Images/google.png" }, { name: "Github", img: "/Images/github.png" }, { name: "TCS", img: "/Images/google.png" }, { name: "Infosys", img: "/Images/google.png" }].map((company, i) => (
-                <div key={i} className="bg-gradient-to-br from-sky-100 to-sky-200 p-3 rounded-2xl flex items-center justify-between shadow">
-                  <img src={company.img} alt={company.name} className="w-6" />
-                  <p className="text-sm text-gray-700 font-medium">{company.name}</p>
-                  <span className="text-sm text-gray-600">Jobs</span>
+            <div className="flex flex-col gap-4">
+              {user?.job_recommendations?.map((job, i) => (
+                <div
+                  key={i}
+                  className="bg-white border border-sky-200 p-4 rounded-2xl shadow-md hover:shadow-lg transition-all flex flex-col gap-2"
+                >
+                  {/* Title with icon */}
+                  <div className="flex items-center gap-2">
+                    <img src="/Images/google.png" alt="Job Logo" className="w-6 h-6 rounded-md" />
+                    <h3 className="text-sm font-semibold text-gray-800">{job.title}</h3>
+                  </div>
+
+                  {/* Match Insights */}
+                  <p className="text-xs text-gray-600 italic border-l-4 border-sky-400 pl-2">
+                    {job.match_insights}
+                  </p>
+
+                  {/* Apply button */}
+                  <div className="flex justify-end">
+                    <a
+                      href={job.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-block text-xs font-medium bg-gradient-to-r from-sky-500 to-sky-600 text-white px-4 py-1.5 rounded-full shadow hover:scale-105 hover:shadow-lg transition"
+                    >
+                      Apply Now
+                    </a>
+                  </div>
                 </div>
               ))}
             </div>
+
+
           </div>
         </div>
       </div>

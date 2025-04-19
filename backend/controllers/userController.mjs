@@ -2,7 +2,6 @@ import User from '../models/User.mjs';
 import jwt from 'jsonwebtoken';
 import axios from 'axios';
 
-// ✅ Step 2: Update Common Info
 export async function updateCommonInfo(req, res) {
   const { name, bio, location, phone, skills } = req.body;
   const userId = req.user.id;
@@ -17,21 +16,40 @@ export async function updateCommonInfo(req, res) {
 
     if (!user) return res.status(404).json({ message: 'User not found' });
 
-    // Step 2: Trigger FastAPI course recommendation
-    try {
-      await axios.get(`https://error404-prabal-2.onrender.com/recommend_courses/${userId}`);
-      console.log('✅ Course recommendation triggered for user:', userId);
-    } catch (fastApiError) {
-      console.error('❌ FastAPI call failed:', fastApiError.message);
-      // Don't block response on FastAPI failure
-    }
-
+    // ✅ Step 2: Respond to frontend immediately
     res.status(200).json({ message: 'Common info updated', user });
+
+    // 🔁 Step 3: Add delay before triggering FastAPI
+    setTimeout(() => {
+      const courseURL = `https://error404-prabal-production.up.railway.app/recommend_courses/${userId}`;
+      const jobURL = `https://error404-prabal-production.up.railway.app/recommend_jobs/${userId}`;
+
+      Promise.allSettled([
+        axios.get(courseURL),
+        axios.get(jobURL)
+      ])
+        .then(([courseResult, jobResult]) => {
+          if (courseResult.status === 'fulfilled') {
+            console.log('✅ Course recommendation triggered for user:', userId);
+          } else {
+            console.error('❌ Course API error:', courseResult.reason.message);
+          }
+
+          if (jobResult.status === 'fulfilled') {
+            console.log('✅ Job recommendation triggered for user:', userId);
+          } else {
+            console.error('❌ Job API error:', jobResult.reason.message);
+          }
+        });
+    }, 300); // Small delay to ensure DB consistency
+
   } catch (error) {
     console.error('Update error:', error);
     res.status(500).json({ message: 'Server error' });
   }
 }
+
+
 
 // ✅ Step 3: Select Role
 export const selectRole = async (req, res) => {
