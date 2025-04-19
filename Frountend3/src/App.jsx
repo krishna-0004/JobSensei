@@ -20,6 +20,8 @@ import './App.css'
 import MentorProfile from './components/Profile/MentorProfile';
 import InternProfile from './components/Profile/InternProfile';
 import RecruiterProfile from './components/Profile/RecruiterProfile';
+import AllJob from './components/Jobs/AllJobs';
+import RoadmapSection from './components/Roadmap/RoadmapSection';
 
 function App() {
   const location = useLocation();
@@ -28,11 +30,11 @@ function App() {
   const shouldShowNavbar = !hideNavAndFooterRoutes.includes(location.pathname);
 
   return (
-    <section className="min-h-screen w-full bg-[#f6f7f9] font-RS">
+    <section className="min-h-screen w-full bg-sky-50 font-RS">
       <div className={`flex ${shouldShowNavbar ? 'flex-row' : 'flex-col'} w-full`}>
         
         {shouldShowNavbar && (
-          <div className="w-[16.6%] min-w-[240px]">
+          <div className="w-[16.6%] min-w-[240px] max-md:fixed ">
             <Navbar />
           </div>
         )}
@@ -89,6 +91,10 @@ function App() {
             <Route path='/Mentor-Profile' element={<MentorProfile />} />
             <Route path='/Intern-Profile' element={<InternProfile />} />
             <Route path='/Recrut-Profile' element={<RecruiterProfile />} />
+
+            <Route path='/Jobs' element={<AllJob/>} />
+
+            <Route path='/RS' element={<RoadmapSection />} />
 
           </Routes>
         </div>

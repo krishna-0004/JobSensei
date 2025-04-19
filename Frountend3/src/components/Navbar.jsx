@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   Menu,
   LayoutDashboard,
@@ -7,122 +7,78 @@ import {
   UserRoundPen,
   BookOpenCheck,
   LogOut,
+  X,
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 export default function Navbar({ userRole = "intern" }) {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const toggleSidebar = () => {
+    setIsOpen(!isOpen);
+  };
+
+  const navItems = {
+    intern: [
+      { to: "/intan", icon: <LayoutDashboard />, label: "Dashboard" },
+      { to: "/Jobs", icon: <BriefcaseBusiness />, label: "Jobs" },
+      { to: "/Intern-Profile", icon: <UserRoundPen />, label: "Profile" },
+      { to: "/mentors", icon: <GraduationCap />, label: "Mentors" },
+      { to: "/mock", icon: <BookOpenCheck />, label: "Mock Interview" },
+    ],
+    mantor: [
+      { to: "/dashboard", icon: <LayoutDashboard />, label: "Dashboard" },
+      { to: "/Mentor-Profile", icon: <UserRoundPen />, label: "Profile" },
+    ],
+    recrut: [
+      { to: "/dashboard", icon: <LayoutDashboard />, label: "Dashboard" },
+      { to: "/Recruiter-Profile", icon: <UserRoundPen />, label: "Profile" },
+    ],
+  };
+
   return (
-    <section className="text-black  font-RS p-6 m-2 md:h-[97vh] rounded-2xl bg-[#E8EAEE]">
-      <nav className="flex flex-col justify-between gap-4">
-        <div className="flex justify-start gap-6 items-center">
-          <Menu />
-          <h3>User Name</h3>
-        </div>
+    <>
+      {/* Toggle button for mobile */}
+      <button
+        className="md:hidden fixed top-4 left-4 z-50 p-2 bg-white rounded-md shadow-md"
+        onClick={toggleSidebar}
+      >
+        {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+      </button>
 
-        {userRole === "intern" && (
+      {/* Sidebar */}
+      <div
+        className={`fixed top-0 left-0 h-[100vh] z-40 w-[70%] sm:w-[60%] md:w-[16.6%] min-w-[240px] bg-[#DEF2FF] p-6 rounded-r-2xl transition-transform duration-300 font-RS shadow-md
+          ${isOpen ? 'translate-x-0' : '-translate-x-full'} 
+          md:translate-x-0 md:static md:block`}
+      >
+        <nav className="flex flex-col justify-between h-full gap-4">
+          <div>
+            <div className="flex justify-start gap-6 items-center mb-4">
+              <Menu />
+              <h3 className="font-semibold text-lg">User Name</h3>
+            </div>
 
-          <ul className="mt-5 flex flex-col gap-4">
-            <li>
-              <Link to="/dashboard" className="flex items-center gap-6">
-                <LayoutDashboard />
-                <span>Dashboard</span>
-              </Link>
-            </li>
+            <ul className="flex flex-col gap-4">
+              {navItems[userRole]?.map((item, idx) => (
+                <li key={idx}>
+                  <Link to={item.to} className="flex items-center gap-6 hover:text-indigo-600 transition">
+                    {item.icon}
+                    <span>{item.label}</span>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
 
-
-
-
-            <li>
-              <Link to="/jobs" className="flex items-center gap-6">
-                <BriefcaseBusiness />
-                <span>Jobs</span>
-              </Link>
-            </li>
-
-            <li>
-              <Link to="/Intern-Profile" className="flex items-center gap-6">
-                <UserRoundPen />
-                <span>Profile</span>
-              </Link>
-            </li>
-
-
-            <li>
-              <Link to="/mentors" className="flex items-center gap-6">
-                <GraduationCap />
-                <span>Mentors</span>
-              </Link>
-            </li>
-
-            <li>
-              <Link to="/mock" className="flex items-center gap-6">
-                <BookOpenCheck />
-                <span>Mock Interview</span>
-              </Link>
-            </li>
-          </ul>
-
-        )}
-
-        {userRole === "mantor" && (
-
-          <ul className="mt-5 flex flex-col gap-4">
-
-            <li>
-              <Link to="/dashboard" className="flex items-center gap-6">
-                <LayoutDashboard />
-                <span>Dashboard</span>
-              </Link>
-            </li>
-
-            <li>
-              <Link to="/Mentor-Profile" className="flex items-center gap-6">
-                <UserRoundPen />
-                <span>Profile</span>
-              </Link>
-            </li>
-
-
-
-          </ul>
-
-
-        )}
-
-        {userRole === "recrut" && (
-
-          <ul className="mt-5 flex flex-col gap-4">
-
-            <li>
-              <Link to="/dashboard" className="flex items-center gap-6">
-                <LayoutDashboard />
-                <span>Dashboard</span>
-              </Link>
-            </li>
-
-            <li>
-              <Link to="/Recrut-Profile" className="flex items-center gap-6">
-                <UserRoundPen />
-                <span>Profile</span>
-              </Link>
-            </li>
-
-
-
-          </ul>
-
-
-        )}
-
-        {/* Common for mentor, recruiter, intern */}
-        <li className="text-red-500 absolute bottom-10">
-          <Link to="/logout" className="flex items-center gap-6">
-            <LogOut />
-            <span>Sign Out</span>
-          </Link>
-        </li>
-
-      </nav>
-    </section >
+          <li className="text-red-500">
+            <Link to="/logout" className="flex items-center gap-6 hover:text-red-700 transition">
+              <LogOut />
+              <span>Sign Out</span>
+            </Link>
+          </li>
+        </nav>
+      </div>
+    </>
   );
 }

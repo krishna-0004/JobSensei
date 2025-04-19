@@ -1,253 +1,132 @@
-import React from 'react'
-import { SquarePlay, BookType, CircleCheck, Headphones, Languages, BriefcaseBusiness, FileUser, Search  } from 'lucide-react'
-import { Link } from 'react-router-dom'
+import React from 'react';
+import {
+  SquarePlay, BookType, CircleCheck, Headphones,
+  Languages, BriefcaseBusiness, FileUser, Search
+} from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 export default function IntanDashboard() {
   return (
-    <>
+    <section className="p-4 bg-sky-50">
+      <div>
+        <h1 className="text-3xl font-bold mt-4 text-gray-800">Welcome, Name</h1>
+        <p className="text-base text-gray-500">AI Career Paths</p>
+      </div>
 
-      <section className="m-4">
-        <div className="">
-          <h1 className="text-3xl font-bold mt-8">Welcome, Name </h1>
+      <div className="grid grid-cols-1 lg:grid-cols-4 gap-6 mt-2">
+        {/* Main Content */}
+        <div className="lg:col-span-3 space-y-3">
 
-          <p className="text-sm mt-2">AI Career Paths</p>
+          {/* Recommended Videos */}
+          <div>
+            <h2 className="font-semibold  text-gray-700 mb-2">Recommended Videos For You</h2>
+            <div className="flex overflow-x-auto gap-4 pb-2 scrollbar-hide">
+              {[1, 2, 3, 4].map((_, idx) => (
+                <Link to="" key={idx}>
+                  <div className="min-w-[140px] bg-white rounded-2xl shadow hover:shadow-lg transition-all p-4 flex flex-col items-center gap-2">
+                    <div className="p-3 bg-gradient-to-br from-sky-300 to-sky-500 rounded-full">
+                      <SquarePlay className='size-10 text-white' />
+                    </div>
+                    <h2 className="text-sm font-semibold text-center text-gray-700">Video Title</h2>
+                  </div>
+                </Link>
+              ))}
+              <Link to="">
+                <div className="min-w-[140px] bg-gradient-to-br from-gray-100 to-gray-200 rounded-2xl flex flex-col items-center justify-center p-4">
+                  <p className="text-sm font-semibold text-gray-600">More</p>
+                </div>
+              </Link>
+            </div>
+          </div>
+
+          {/* Trending Jobs */}
+          <div className="bg-gradient-to-br from-sky-100 to-sky-200 p-4 rounded-3xl shadow">
+            <div className="flex items-center gap-3 mb-4">
+              <BriefcaseBusiness className="text-sky-600" />
+              <h1 className='font-semibold text-lg text-gray-700'>Trending Jobs</h1>
+            </div>
+
+            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+              {[{
+                title: "Sales Executive",
+                company: "Local Retail Chain",
+                salary: "₹15k - ₹20k/month",
+                skills: ["Communication", "Sales", "Customer Service"],
+                match: "82%"
+              }, {
+                title: "Junior Web Developer",
+                company: "Digital Agency",
+                salary: "₹18k - ₹25k/month",
+                skills: ["HTML", "CSS", "JavaScript"],
+                match: "76%"
+              }, {
+                title: "Content Writer",
+                company: "Education Startup",
+                salary: "₹12k - ₹18k/month",
+                skills: ["Writing", "Research", "Local Language"],
+                match: "88%"
+              }].map((job, index) => (
+                <div key={index} className="bg-white rounded-xl p-4 shadow hover:shadow-md transition">
+                  <div className="mb-2">
+                    <h3 className="font-semibold text-gray-800">{job.title}</h3>
+                    <p className="text-sm text-gray-500">{job.company}</p>
+                  </div>
+                  <span className="inline-block bg-sky-100 text-sky-800 text-xs font-medium px-2 py-1 rounded-full mb-3">
+                    {job.salary}
+                  </span>
+                  <div className="flex flex-wrap gap-2 mb-3">
+                    {job.skills.map((skill, i) => (
+                      <span key={i} className="px-2 py-1 bg-gray-100 text-xs rounded-md text-gray-700">{skill}</span>
+                    ))}
+                  </div>
+                  <span className="text-xs text-gray-400">Match: {job.match}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Skill Building */}
+          <div>
+            <h3 className="font-semibold  text-gray-700 mb-1">Skill Building</h3>
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+              {[{ label: "Learning", icon: BookType }, { label: "Language", icon: Languages }, { label: "Skill", icon: Headphones }, { label: "Career", icon: CircleCheck }].map((item, i) => (
+                <div key={i} className="flex flex-col justify-center items-center gap-2 p-4 bg-gradient-to-br from-sky-200 to-sky-400 rounded-2xl text-white shadow-md">
+                  <item.icon className="size-7 md:size-9" />
+                  <h3 className="text-sm font-semibold">{item.label}</h3>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
 
-        <div className="grid grid-cols-4">
+        {/* Sidebar */}
+        <div className="flex flex-col gap-6">
+          <div className="bg-gradient-to-br from-sky-500 to-sky-700 text-white p-6 rounded-3xl flex flex-col items-center gap-4 shadow">
+            <FileUser className='size-10' />
+            <h2 className="text-center text-lg font-semibold">Job-Winning Resume</h2>
+          </div>
 
-          <div className="col-span-3">
-            <div className="mt-6">
-              <h2 className="font-bold ">Recommended Videos For You</h2>
-
-              <div className="grid grid-cols-5 items-center mt-4">
-                <Link to="">
-                  <div className="flex flex-col items-center justify-center gap-2">
-                    <div className="p-2 bg-sky-200 rounded-4xl">
-                      <SquarePlay className='size-14' />
-                    </div>
-                    <h2 className="font-bold ">Title</h2>
-                  </div>
-                </Link>
-
-                <Link to="">
-                  <div className="flex flex-col items-center justify-center gap-2">
-                    <div className="p-2 bg-sky-200 rounded-4xl">
-                      <SquarePlay className='size-14' />
-                    </div>
-                    <h2 className="font-bold ">Title</h2>
-                  </div>
-                </Link>
-
-                <Link to="">
-                  <div className="flex flex-col items-center justify-center gap-2">
-                    <div className="p-2 bg-sky-200 rounded-4xl">
-                      <SquarePlay className='size-14' />
-                    </div>
-                    <h2 className="font-bold ">Title</h2>
-                  </div>
-                </Link>
-
-                <Link to="">
-                  <div className="flex flex-col items-center justify-center gap-2">
-                    <div className="p-2 bg-sky-200 rounded-4xl">
-                      <SquarePlay className='size-14' />
-                    </div>
-                    <h2 className="font-bold ">Title</h2>
-                  </div>
-                </Link>
-
-                <Link to="">
-                  <div className="flex flex-col items-center justify-center gap-2">
-                    <div className="p-4 bg-sky-200 rounded-4xl">
-                       <p className="text-xl font-bold">More</p>
-                    </div>
-
-                  </div>
-                </Link>
+          <div>
+            <div className="flex justify-between items-center mb-3">
+              <div className="flex items-center gap-2 text-gray-700">
+                <Search />
+                <h1 className="font-semibold">Find Jobs</h1>
               </div>
+              <button className="text-xs bg-gray-200 hover:bg-gray-300 px-3 py-1 rounded-full">See All</button>
             </div>
 
-            <div className="my-4">
-                <div className="bg-sky-200 p-6 rounded-3xl">
-                    <div className="flex justify-start items-center gap-4">
-                      <BriefcaseBusiness/>
-                      <h1 className='font-bold'>Tranding Jobs</h1> 
-                    </div>
-
-                    <div className="mt-2">
-                    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-               
-                <div class="job-card bg-white border border-gray-200 rounded-lg shadow-sm overflow-hidden transition duration-300 hover:shadow-md">
-                    <div class="p-3">
-                        <div class="flex items-center mb-2">
-                            
-                            <div class="ml-4">
-                                <h3 class="font-medium text-gray-900">Sales Executive</h3>
-                                <p class="text-sm text-gray-500">Local Retail Chain</p>
-                            </div>
-                        </div>
-                        <div class="mb-4">
-                            
-                            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800 ml-2">
-                                ₹15k - ₹20k/month
-                            </span>
-                        </div>
-                       
-                        <div class="flex flex-wrap gap-2 mb-4">
-                            <span class="px-2 py-1 bg-gray-100 text-gray-800 text-xs rounded">Communication</span>
-                            <span class="px-2 py-1 bg-gray-100 text-gray-800 text-xs rounded">Sales</span>
-                            <span class="px-2 py-1 bg-gray-100 text-gray-800 text-xs rounded">Customer Service</span>
-                        </div>
-                        <div class="flex justify-between items-center">
-                            <span class="text-xs text-gray-500">Match: 82%</span>
-                            
-                        </div>
-                    </div>
+            <div className="flex flex-col gap-3">
+              {[{ name: "Google", img: "/Images/google.png" }, { name: "Github", img: "/Images/github.png" }, { name: "TCS", img: "/Images/google.png" }, { name: "Infosys", img: "/Images/google.png" }].map((company, i) => (
+                <div key={i} className="bg-gradient-to-br from-sky-100 to-sky-200 p-3 rounded-2xl flex items-center justify-between shadow">
+                  <img src={company.img} alt={company.name} className="w-6" />
+                  <p className="text-sm text-gray-700 font-medium">{company.name}</p>
+                  <span className="text-sm text-gray-600">Jobs</span>
                 </div>
-                
-               
-                <div class="job-card bg-white border border-gray-200 rounded-lg shadow-sm overflow-hidden transition duration-300 hover:shadow-md">
-                    <div class="p-3">
-                        <div class="flex items-center mb-2">
-                            
-                            <div class="ml-4">
-                                <h3 class=" font-medium text-gray-900">Junior Web Developer</h3>
-                                <p class="text-sm text-gray-500">Digital Agency</p>
-                            </div>
-                        </div>
-                        <div class="mb-4">
-                           
-                            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800 ml-2">
-                                ₹18k - ₹25k/month
-                            </span>
-                        </div>
-                        
-                        <div class="flex flex-wrap gap-2 mb-4">
-                            <span class="px-2 py-1 bg-gray-100 text-gray-800 text-xs rounded">HTML</span>
-                            <span class="px-2 py-1 bg-gray-100 text-gray-800 text-xs rounded">CSS</span>
-                            <span class="px-2 py-1 bg-gray-100 text-gray-800 text-xs rounded">JavaScript</span>
-                        </div>
-                        <div class="flex justify-between items-center">
-                            <span class="text-xs text-gray-500">Match: 76%</span>
-                            
-                        </div>
-                    </div>
-                </div>
-                
-               
-                <div class="job-card bg-white border border-gray-200 rounded-lg shadow-sm overflow-hidden transition duration-300 hover:shadow-md">
-                    <div class="p-3">
-                        <div class="flex items-center mb-2">
-                           
-                            <div class="ml-4">
-                                <h3 class=" font-medium text-gray-900">Content Writer</h3>
-                                <p class="text-sm text-gray-500">Education Startup</p>
-                            </div>
-                        </div>
-                        <div class="mb-4">
-                           
-                            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800 ml-2">
-                                ₹12k - ₹18k/month
-                            </span>
-                        </div>
-                       
-                        <div class="flex flex-wrap gap-2 mb-4">
-                            <span class="px-2 py-1 bg-gray-100 text-gray-800 text-xs rounded">Writing</span>
-                            <span class="px-2 py-1 bg-gray-100 text-gray-800 text-xs rounded">Research</span>
-                            <span class="px-2 py-1 bg-gray-100 text-gray-800 text-xs rounded">Local Language</span>
-                        </div>
-                        <div class="flex justify-between items-center">
-                            <span class="text-xs text-gray-500">Match: 88%</span>
-                            
-                        </div>
-                    </div>
-                </div>
+              ))}
             </div>
-                    </div>
-                </div>
-            </div>
-
-            <div className="">
-                <h3 className="font-bold">Skill Building</h3>
-
-                <div className="mt-2">
-                  <div className="grid grid-cols-5 items-center ">
-                   
-                    <div className="flex justify-center items-center">
-                    <div className="flex flex-col justify-center items-center gap-2 p-4 bg-sky-200 rounded-full">
-                      <h3 className="font-bold">Learning</h3>
-                      <BookType className='size-8'/>
-                    </div>
-                    </div>
-
-                    <div className="flex justify-center items-center">
-                    <div className="flex flex-col justify-center items-center gap-2 p-4 bg-sky-200 rounded-full">
-                      <h3 className="font-bold">Language</h3>
-                      <Languages  className='size-8'/>
-                    </div>
-                    </div>
-
-                    <div className="flex justify-center items-center">
-                    <div className="flex flex-col justify-center items-center gap-2 p-4 bg-sky-200 rounded-full">
-                      <h3 className="font-bold">Skill</h3>
-                      <Headphones  className='size-8'/>
-                    </div>
-                    </div>
-
-                    <div className="flex justify-center items-center">
-                    <div className="flex flex-col justify-center items-center gap-2 p-4 bg-sky-200 rounded-full">
-                      <h3 className="font-bold">Career</h3>
-                      <CircleCheck  className='size-8'/>
-                    </div>
-                    </div>
-
-
-                  </div>
-                </div>
-            </div>
-
           </div>
-
-          <div className=" px-6">
-                <div className="">
-                  <div className="bg-sky-500 text-white p-4 py-10  rounded-3xl flex justify-center flex-col items-center gap-4">
-                    <div className="">
-                      <FileUser className='size-10' />
-                    </div>
-                        <h2 className="text-center">Job-Winning Resume</h2>
-                        
-                  </div>
-
-                  
-
-                  <div className="mt-10">
-                        <div className="flex justify-between items-center">
-                        <div className="flex justify-start gap-4">
-                        <Search />
-                        <h1 className="font-bold">Find Jobs </h1>
-
-                        </div>
-
-                        <div className="">
-                          <button className="text-sm bg-gray-300 p-2 rounded-3xl">See All</button>
-                        </div>
-                        </div>
-
-                        <div className="flex flex-col ">
-                          <div className="bg-sky-200 p-2 rounded-4xl flex flex-col justify-start ">
-                              <p className="">Jobs</p>
-                              <img src="/Images/google.png" alt="google" className="w-6" />
-                              <p className="">Google</p>
-                          </div>
-                        </div>
-                  </div>
-                </div>
-          </div>
-
         </div>
-      </section>
-
-
-    </>
-  )
+      </div>
+    </section>
+  );
 }
