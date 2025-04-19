@@ -19,7 +19,7 @@ export async function updateCommonInfo(req, res) {
 
     // Step 2: Trigger FastAPI course recommendation
     try {
-      await axios.get(`https://error404-prabal-2.onrender.com/recommend_courses/${userId}`);
+      await axios.get(`https://error404-prabal-production.up.railway.app/recommend_courses/${userId}`);
       console.log('✅ Course recommendation triggered for user:', userId);
     } catch (fastApiError) {
       console.error('❌ FastAPI call failed:', fastApiError.message);

@@ -40,13 +40,12 @@ export default function IntanDashboard() {
         console.error('❌ Failed to fetch user or courses:', err);
       }
     };
-  
     fetchUserData();
   }, []);
   
 
   return (
-    <section className="p-4 bg-sky-50">
+    <section className="p-4 bg-sky-50 overflow-y-auto h-screen">
       <div>
         <h1 className="text-3xl font-bold mt-4 text-gray-800">Welcome</h1>
         <p className="text-base text-gray-500">AI Career Paths</p>
@@ -67,7 +66,7 @@ export default function IntanDashboard() {
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  <div className="min-w-[140px] bg-white rounded-2xl shadow hover:shadow-lg transition-all p-4 flex flex-col items-center gap-2">
+                  <div className="min-w-[140px] h-40 bg-white rounded-2xl shadow hover:shadow-lg transition-all p-4 flex flex-col items-center gap-2">
                     <div className="p-3 bg-gradient-to-br from-sky-300 to-sky-500 rounded-full">
                       <SquarePlay className="size-10 text-white" />
                     </div>
