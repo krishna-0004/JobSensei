@@ -62,27 +62,38 @@ const AdminDashboard = () => {
   };
 
   return (
-    <div>
-      <h1>Admin Dashboard</h1>
-      <h2>Pending Approval</h2>
+    <div className="p-4">
+      <h1 className="text-2xl font-bold mb-4">Admin Dashboard</h1>
+      <h2 className="text-xl mb-2">Pending Approval</h2>
       {users.length === 0 ? (
-        <p>No users are pending approval.</p>
+        <p className="text-gray-600">No users are pending approval.</p>
       ) : (
-        <ul>
+        <ul className="space-y-4">
           {users.map((user) => (
-            <li key={user._id}>
-              <div>
-                <p>Name: {user.name}</p>
-                <p>Email: {user.email}</p>
-                <p>Role: {user.role}</p>
-                <button onClick={() => handleApprove(user._id)}>Approve</button>
-                <button onClick={() => handleReject(user._id)}>Reject</button>
+            <li key={user._id} className="border p-4 rounded shadow-sm">
+              <p><strong>Name:</strong> {user.name}</p>
+              <p><strong>Email:</strong> {user.email}</p>
+              <p><strong>Role:</strong> {user.role}</p>
+              <div className="mt-2 space-x-2">
+                <button
+                  className="px-3 py-1 bg-green-500 text-white rounded"
+                  onClick={() => handleApprove(user._id)}
+                >
+                  Approve
+                </button>
+                <button
+                  className="px-3 py-1 bg-red-500 text-white rounded"
+                  onClick={() => handleReject(user._id)}
+                >
+                  Reject
+                </button>
               </div>
             </li>
           ))}
         </ul>
       )}
     </div>
+
   );
 };
 
