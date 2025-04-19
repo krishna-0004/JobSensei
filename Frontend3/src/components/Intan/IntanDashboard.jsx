@@ -2,8 +2,11 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import {
   SquarePlay, BookType, CircleCheck, Headphones,
-  Languages, BriefcaseBusiness, FileUser, Search
+  Languages, BriefcaseBusiness, FileUser, Search,
+  ArrowRight,
+  Map
 } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const decodeJwt = (token) => {
   try {
@@ -43,6 +46,9 @@ export default function IntanDashboard() {
     fetchUserData();
   }, []);
 
+  const steps = ["Plan", "Design", "Develop", "Test", "Deploy"];
+
+
 
   return (
     <section className="p-4 bg-sky-50 overflow-y-auto h-screen">
@@ -79,50 +85,10 @@ export default function IntanDashboard() {
             </div>
           </div>
 
-          {/* Trending Jobs */}
-          <div className="bg-gradient-to-br from-sky-100 to-sky-200 p-4 rounded-3xl shadow">
-            <div className="flex items-center gap-3 mb-4">
-              <BriefcaseBusiness className="text-sky-600" />
-              <h1 className="font-semibold text-lg text-gray-700">Trending Jobs</h1>
-            </div>
-
-            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-              {[{
-                title: "Sales Executive",
-                company: "Local Retail Chain",
-                salary: "₹15k - ₹20k/month",
-                skills: ["Communication", "Sales", "Customer Service"],
-                match: "82%"
-              }, {
-                title: "Junior Web Developer",
-                company: "Digital Agency",
-                salary: "₹18k - ₹25k/month",
-                skills: ["HTML", "CSS", "JavaScript"],
-                match: "76%"
-              }, {
-                title: "Content Writer",
-                company: "Education Startup",
-                salary: "₹12k - ₹18k/month",
-                skills: ["Writing", "Research", "Local Language"],
-                match: "88%"
-              }].map((job, index) => (
-                <div key={index} className="bg-white rounded-xl p-4 shadow hover:shadow-md transition">
-                  <div className="mb-2">
-                    <h3 className="font-semibold text-gray-800">{job.title}</h3>
-                    <p className="text-sm text-gray-500">{job.company}</p>
-                  </div>
-                  <span className="inline-block bg-sky-100 text-sky-800 text-xs font-medium px-2 py-1 rounded-full mb-3">
-                    {job.salary}
-                  </span>
-                  <div className="flex flex-wrap gap-2 mb-3">
-                    {job.skills.map((skill, i) => (
-                      <span key={i} className="px-2 py-1 bg-gray-100 text-xs rounded-md text-gray-700">{skill}</span>
-                    ))}
-                  </div>
-                  <span className="text-xs text-gray-400">Match: {job.match}</span>
-                </div>
-              ))}
-            </div>
+          
+          <div className="my-10 bg-gradient-to-br from-sky-500 to-sky-700 text-white p-6 rounded-3xl flex flex-col items-center gap-4 shadow">
+            <FileUser className='size-10' />
+            <h2 className="text-center text-lg font-semibold">Job-Winning Resume</h2>
           </div>
 
           {/* Skill Building */}
@@ -141,13 +107,22 @@ export default function IntanDashboard() {
 
         {/* Sidebar */}
         <div className="flex flex-col gap-6">
-          <div className="bg-gradient-to-br from-sky-500 to-sky-700 text-white p-6 rounded-3xl flex flex-col items-center gap-4 shadow">
-            <FileUser className='size-10' />
-            <h2 className="text-center text-lg font-semibold">Job-Winning Resume</h2>
-          </div>
+          
+
+          
+          {/* Trending Jobs */}
+          <div className="bg-gradient-to-br from-purple-500 to-indigo-700 text-white p-6 rounded-3xl flex flex-col items-center gap-4 shadow">
+  <Map className="size-10" />
+  <h2 className="text-center text-lg font-semibold">Turning Ideas into Impactful Products</h2>
+
+  
+  <Link to="/RS"><button className="bg-white px-4 py-1 text-blue-500 rounded-3xl">Click to Generate Roadmap</button></Link>
+
+</div>  
+
 
           <div>
-            <div className="flex justify-between items-center mb-3">
+            <div className="flex justify-between items-center mb-3 mt-5">
               <div className="flex items-center gap-2 text-gray-700">
                 <Search />
                 <h1 className="font-semibold">Recomended Jobs</h1>
@@ -155,7 +130,7 @@ export default function IntanDashboard() {
               <button className="text-xs bg-gray-200 hover:bg-gray-300 px-3 py-1 rounded-full">See All</button>
             </div>
 
-            <div className="flex flex-col gap-4">
+            <div className="flex flex-col gap-4 overflow-y-auto h-80 py-2 ">
               {user?.job_recommendations?.map((job, i) => (
                 <div
                   key={i}
@@ -163,7 +138,7 @@ export default function IntanDashboard() {
                 >
                   {/* Title with icon */}
                   <div className="flex items-center gap-2">
-                    <img src="/Images/google.png" alt="Job Logo" className="w-6 h-6 rounded-md" />
+                    <BriefcaseBusiness className='text-sky-400'/>
                     <h3 className="text-sm font-semibold text-gray-800">{job.title}</h3>
                   </div>
 

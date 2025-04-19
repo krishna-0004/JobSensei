@@ -28,11 +28,15 @@ const RoadmapSection = () => {
   }, [selectedTopic]);
 
   return (
-    <div className="p-6 mx-auto bg-white rounded-2xl shadow-md overflow-y-auto h-screen max-w-5xl">
+    <div className="p-6 mx-auto bg-white rounded-2xl shadow-md overflow-y-auto h-screen ">
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-6 gap-4">
         <h1 className="text-3xl font-extrabold text-gray-800">Learning Roadmap</h1>
-        <select
-          className="border border-gray-300 rounded-md px-4 py-2 bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-400"
+        
+      </div>
+
+      <div className="flex justify-center my-6">
+      <select
+          className="border  border-gray-300 rounded-md px-4 py-2 w-1/3 bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-400"
           value={selectedTopic}
           onChange={(e) => setSelectedTopic(e.target.value)}
         >
@@ -45,7 +49,7 @@ const RoadmapSection = () => {
       </div>
 
       {loading ? (
-        <p className="text-gray-500 text-center">Loading roadmap...</p>
+        <p className="text-gray-500 text-center font-bold text-4xl mt-10  animate-bounce duration-1000">Loading roadmap...</p>
       ) : error ? (
         <p className="text-red-500 text-center">{error}</p>
       ) : (
