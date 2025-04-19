@@ -19,6 +19,37 @@ const userSchema = new mongoose.Schema({
   },
   skills: [{ type: String }],
 
+  // ✅ New Shared Fields
+  gender: {
+    type: String,
+    enum: ['male', 'female', 'others', 'prefer not to say'],
+  },
+  dateOfBirth: { type: Date },
+
+  education: [{
+    institution: String,
+    degree: String,
+    fieldOfStudy: String,
+    startYear: Number,
+    endYear: Number,
+  }],
+
+  awardsAndCertifications: [{
+    title: String,
+    issuer: String,
+    year: Number,
+    credentialUrl: String,
+    imgeUrl: String,
+  }],
+
+  projects: [{
+    name: String,
+    description: String,
+    link: String,
+    techStack: [String],
+    imageUrl: String, // 📸 Project screenshot or cover photo
+  }],
+
   role: {
     type: String,
     enum: ['intan', 'recruiter', 'mentor', 'admin'],
@@ -60,6 +91,7 @@ const userSchema = new mongoose.Schema({
   },
 
   adminNotes: { type: String }
+
 }, { timestamps: true });
 
 export default mongoose.model('User', userSchema);

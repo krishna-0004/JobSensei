@@ -11,6 +11,7 @@ import {
   uploadAvatar,
   getProfileById,
   updateProfileById,
+  uploadCertificateOrProjectImage
 } from '../controllers/userController.mjs';
 import upload from '../middleware/upload.mjs';
 
@@ -26,6 +27,7 @@ router.get('/:id',getUserById);
 router.get('/profile/:id', getProfileById);           // get full profile by id
 router.put('/profile/:id', updateProfileById); 
 router.put('/upload-avatar', authenticateJWT, upload.single('avatar'), uploadAvatar);
+router.post('/upload-image', upload.single('image'), uploadCertificateOrProjectImage);
 
 
 export default router;

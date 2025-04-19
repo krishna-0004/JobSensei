@@ -30,30 +30,30 @@ const AuthSuccess = () => {
     const urlParams = new URLSearchParams(window.location.search);
     const tokenFromUrl = urlParams.get('token');
     if (tokenFromUrl) saveToken(tokenFromUrl);
-
+  
     const token = tokenFromUrl || localStorage.getItem('token');
     if (!token) {
       console.warn("⚠️ No token found");
       navigate('/login');
       return;
     }
-
+  
     const user = decodeJwt(token);
     if (!user) {
       console.warn("⚠️ Token decode failed");
       navigate('/login');
       return;
     }
-
+  
     const email = user.email?.trim().toLowerCase();
     const role = user.role?.trim().toLowerCase();
     const userId = user.id;
-
+  
     if (email === 'krishnakadukar0004@gmail.com') {
       navigate('/admin');
       return;
     }
-
+  
     // 🔁 Get fresh data from backend
     fetch(`http://localhost:4000/user/${userId}`, {
       headers: {
@@ -67,10 +67,16 @@ const AuthSuccess = () => {
           navigate('/login');
           return;
         }
-
+  
         console.log('📦 Fetched user:', data);
-
-        if (['intan', 'mentor', 'recruiter'].includes(data.role)) {
+  
+        if (data.role === 'intan') {
+          if (data.profileCompleted) {
+            navigate('/intan');
+          } else {
+            navigate('/common-profile');
+          }
+        } else if (['mentor', 'recruiter'].includes(data.role)) {
           if (data.isApproved) {
             navigate(`/${data.role}`);
           } else {
@@ -88,6 +94,7 @@ const AuthSuccess = () => {
         setLoading(false);
       });
   }, [navigate]);
+  
 
   return <div>{loading ? <h2>Loading user info...</h2> : <h2>Redirecting...</h2>}</div>;
 };

@@ -248,9 +248,39 @@ export const getProfileById = async (req, res) => {
 };
 
 // PUT /user/profile/:id
+// PUT /user/profile/:id
 export const updateProfileById = async (req, res) => {
   try {
-    const updates = req.body;
+    const {
+      name,
+      phone,
+      location,
+      bio,
+      gender,
+      dateOfBirth,
+      skills,
+      education,
+      awardsAndCertifications,
+      projects,
+      experience,
+      certifications,
+      // Add more if needed
+    } = req.body;
+
+    const updates = {
+      name,
+      phone,
+      location,
+      bio,
+      gender,
+      dateOfBirth,
+      skills,
+      education,
+      awardsAndCertifications,
+      projects,
+      'mentorDetails.certifications': certifications, // Optional if mentor role
+      experience,
+    };
 
     const user = await User.findByIdAndUpdate(req.params.id, updates, {
       new: true,
@@ -263,5 +293,15 @@ export const updateProfileById = async (req, res) => {
   } catch (err) {
     console.error('❌ Update profile by ID error:', err);
     res.status(500).json({ error: 'Server error' });
+  }
+};
+
+export const uploadCertificateOrProjectImage = async (req, res) => {
+  try {
+    const imageUrl = req.file.path; // Cloudinary returns the secure URL here
+    res.status(200).json({ imageUrl });
+  } catch (error) {
+    console.error('❌ Error uploading image:', error);
+    res.status(500).json({ error: 'Image upload failed' });
   }
 };
