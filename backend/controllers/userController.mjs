@@ -7,7 +7,6 @@ export async function updateCommonInfo(req, res) {
   const userId = req.user.id;
 
   try {
-    // Step 1: Update user common info
     const user = await User.findByIdAndUpdate(
       userId,
       { name, bio, location, phone, skills },
@@ -16,43 +15,46 @@ export async function updateCommonInfo(req, res) {
 
     if (!user) return res.status(404).json({ message: 'User not found' });
 
-    // Step 2: Trigger FastAPI course recommendation
-    try {
-      await axios.get(`https://error404-prabal-production.up.railway.app/recommend_courses/${userId}`);
-      console.log('✅ Course recommendation triggered for user:', userId);
-    } catch (fastApiError) {
-      console.error('❌ FastAPI call failed:', fastApiError.message);
-      // Don't block response on FastAPI failure
-    }
-
     res.status(200).json({ message: 'Common info updated', user });
 
-    // 🔁 Step 3: Add delay before triggering FastAPI
     setTimeout(() => {
-      const courseURL = `https://error404-prabal-production.up.railway.app/recommend_courses/${userId}`;
-      const jobURL = `https://error404-prabal-production.up.railway.app/recommend_jobs/${userId}`;
-
-      Promise.allSettled([
-        axios.get(courseURL),
-        axios.get(jobURL)
-      ])
-        .then(([courseResult, jobResult]) => {
-          if (courseResult.status === 'fulfilled') {
-            console.log('✅ Course recommendation triggered for user:', userId);
-          } else {
-            console.error('❌ Course API error:', courseResult.reason.message);
-          }
-
-          if (jobResult.status === 'fulfilled') {            console.log('✅ Job recommendation triggered for user:', userId);
-          } else {
-            console.error('❌ Job API error:', jobResult.reason.message);
-          }
-        });
-    }, 300); // Small delay to ensure DB consistency
+      triggerFastAPIRecommendations(userId);
+    }, 300);
 
   } catch (error) {
     console.error('Update error:', error);
     res.status(500).json({ message: 'Server error' });
+  }
+}
+
+async function triggerFastAPIRecommendations(userId) {
+  const courseURL = `https://error404-prabal-production.up.railway.app/recommend_courses/${userId}`;
+  const jobURL = `https://error404-prabal-production.up.railway.app/recommend_jobs/${userId}`;
+
+  // Trigger course recommendation
+  try {
+    const courseRes = await axios.get(courseURL, { responseType: 'text' });
+    if (courseRes.data?.trim()) {
+      // console.log('✅ Course recommendation triggered for user:', userId, '| Response:', courseRes.data);
+    } else {
+      console.warn('⚠️ Course API returned empty response for user:', userId);
+    }
+  } catch (err) {
+    console.error('❌ Course API error:', err.message);
+    if (err.response?.data) {
+      console.error('📦 Course API response:', err.response.data);
+    }
+  }
+
+  // Trigger job recommendation
+  try {
+    const jobRes = await axios.get(jobURL, { responseType: 'json' });
+    // console.log('✅ Job recommendation triggered for user:', userId, '| Response:', jobRes.data);
+  } catch (err) {
+    console.error('❌ Job API error:', err.message);
+    if (err.response?.data) {
+      console.error('📦 Job API response:', err.response.data);
+    }
   }
 }
 
