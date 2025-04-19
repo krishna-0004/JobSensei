@@ -16,7 +16,15 @@ export async function updateCommonInfo(req, res) {
 
     if (!user) return res.status(404).json({ message: 'User not found' });
 
-    // ✅ Step 2: Respond to frontend immediately
+    // Step 2: Trigger FastAPI course recommendation
+    try {
+      await axios.get(`https://error404-prabal-production.up.railway.app/recommend_courses/${userId}`);
+      console.log('✅ Course recommendation triggered for user:', userId);
+    } catch (fastApiError) {
+      console.error('❌ FastAPI call failed:', fastApiError.message);
+      // Don't block response on FastAPI failure
+    }
+
     res.status(200).json({ message: 'Common info updated', user });
 
     // 🔁 Step 3: Add delay before triggering FastAPI
@@ -35,8 +43,7 @@ export async function updateCommonInfo(req, res) {
             console.error('❌ Course API error:', courseResult.reason.message);
           }
 
-          if (jobResult.status === 'fulfilled') {
-            console.log('✅ Job recommendation triggered for user:', userId);
+          if (jobResult.status === 'fulfilled') {            console.log('✅ Job recommendation triggered for user:', userId);
           } else {
             console.error('❌ Job API error:', jobResult.reason.message);
           }

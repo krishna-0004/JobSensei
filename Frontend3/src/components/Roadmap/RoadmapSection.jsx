@@ -13,7 +13,7 @@ const RoadmapSection = () => {
     setLoading(true);
     setError("");
     try {
-      const res = await fetch(`https://error404-prabal-2.onrender.com/roadmap/${topic}`);
+      const res = await fetch(`https://error404-prabal-production.up.railway.app/roadmap/${topic}`);
       const data = await res.json();
       setRoadmapData(data);
     } catch (err) {
