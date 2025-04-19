@@ -39,7 +39,7 @@ const userSchema = new mongoose.Schema({
     issuer: String,
     year: Number,
     credentialUrl: String,
-    imgeUrl: String,
+    imageUrl: String, // 📸 Certification image URL
   }],
 
   projects: [{
@@ -67,6 +67,7 @@ const userSchema = new mongoose.Schema({
   },
   rejectionReason: { type: String },
 
+  // Updated Business Details with Job References
   businessDetails: {
     companyName: { type: String },
     website: { type: String },
@@ -77,8 +78,19 @@ const userSchema = new mongoose.Schema({
     address: { type: String },
     pitchDeckUrl: { type: String },
     isBusinessSubmitted: { type: Boolean, default: false },
+    applicants: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
+    jobs: [
+      {
+        jobId: { type: mongoose.Schema.Types.ObjectId, ref: 'Job' }, // Reference to a Job model
+        title: { type: String },
+        description: { type: String },
+        location: { type: String },
+        applyLink: { type: String },
+      }
+    ]
   },
 
+  // Mentor-specific Details
   mentorDetails: {
     expertise: [{ type: String }],
     linkedIn: { type: String },

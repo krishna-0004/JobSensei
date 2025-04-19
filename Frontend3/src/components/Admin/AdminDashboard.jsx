@@ -1,11 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
 
 const AdminDashboard = () => {
   const [users, setUsers] = useState([]);
-  const navigate = useNavigate();
   const token = localStorage.getItem('token');
+
+  // Dummy total stats (replace these with real data from API later)
+  const totalUsers = 10;
+  const totalMentors = 5;
+  const totalRecruiters = 1;
+  const totalJobs = 151;
 
   // Fetch users with pending approval
   useEffect(() => {
@@ -36,7 +40,6 @@ const AdminDashboard = () => {
           },
         }
       );
-      // Refresh users list after approval
       setUsers(users.filter((user) => user._id !== userId));
     } catch (error) {
       console.error('Error approving user:', error);
@@ -54,7 +57,6 @@ const AdminDashboard = () => {
           },
         }
       );
-      // Refresh users list after rejection
       setUsers(users.filter((user) => user._id !== userId));
     } catch (error) {
       console.error('Error rejecting user:', error);
@@ -62,38 +64,62 @@ const AdminDashboard = () => {
   };
 
   return (
-    <div className="p-4">
-      <h1 className="text-2xl font-bold mb-4">Admin Dashboard</h1>
-      <h2 className="text-xl mb-2">Pending Approval</h2>
-      {users.length === 0 ? (
-        <p className="text-gray-600">No users are pending approval.</p>
-      ) : (
-        <ul className="space-y-4">
-          {users.map((user) => (
-            <li key={user._id} className="border p-4 rounded shadow-sm">
-              <p><strong>Name:</strong> {user.name}</p>
-              <p><strong>Email:</strong> {user.email}</p>
-              <p><strong>Role:</strong> {user.role}</p>
-              <div className="mt-2 space-x-2">
-                <button
-                  className="px-3 py-1 bg-green-500 text-white rounded"
-                  onClick={() => handleApprove(user._id)}
-                >
-                  Approve
-                </button>
-                <button
-                  className="px-3 py-1 bg-red-500 text-white rounded"
-                  onClick={() => handleReject(user._id)}
-                >
-                  Reject
-                </button>
-              </div>
-            </li>
-          ))}
-        </ul>
-      )}
-    </div>
+    <div className="min-h-screen p-6 bg-gray-100">
+      <h1 className="text-3xl font-bold mb-6 text-blue-800 text-center">Admin Dashboard</h1>
 
+      {/* Stats Overview */}
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-10">
+        <div className="bg-white p-6 rounded-xl shadow-md text-center">
+          <h2 className="text-sm font-medium text-gray-600">Total Users</h2>
+          <p className="text-2xl font-bold text-blue-700">{totalUsers}</p>
+        </div>
+        <div className="bg-white p-6 rounded-xl shadow-md text-center">
+          <h2 className="text-sm font-medium text-gray-600">Total Mentors</h2>
+          <p className="text-2xl font-bold text-blue-700">{totalMentors}</p>
+        </div>
+        <div className="bg-white p-6 rounded-xl shadow-md text-center">
+          <h2 className="text-sm font-medium text-gray-600">Total Recruiters</h2>
+          <p className="text-2xl font-bold text-blue-700">{totalRecruiters}</p>
+        </div>
+        <div className="bg-white p-6 rounded-xl shadow-md text-center">
+          <h2 className="text-sm font-medium text-gray-600">Total Jobs</h2>
+          <p className="text-2xl font-bold text-blue-700">{totalJobs}</p>
+        </div>
+      </div>
+
+      {/* Pending Approvals */}
+      <div className="bg-white p-6 rounded-xl shadow-md">
+        <h2 className="text-xl font-semibold text-gray-800 mb-4">Pending Approvals</h2>
+
+        {users.length === 0 ? (
+          <p className="text-gray-500">🎉 No users pending approval.</p>
+        ) : (
+          <ul className="space-y-4">
+            {users.map((user) => (
+              <li key={user._id} className="border p-4 rounded-lg shadow-sm bg-gray-50">
+                <p><strong>Name:</strong> {user.name}</p>
+                <p><strong>Email:</strong> {user.email}</p>
+                <p><strong>Role:</strong> {user.role}</p>
+                <div className="mt-3 flex gap-3">
+                  <button
+                    onClick={() => handleApprove(user._id)}
+                    className="bg-green-500 hover:bg-green-600 text-white px-4 py-1 rounded"
+                  >
+                    ✅ Approve
+                  </button>
+                  <button
+                    onClick={() => handleReject(user._id)}
+                    className="bg-red-500 hover:bg-red-600 text-white px-4 py-1 rounded"
+                  >
+                    ❌ Reject
+                  </button>
+                </div>
+              </li>
+            ))}
+          </ul>
+        )}
+      </div>
+    </div>
   );
 };
 

@@ -13,6 +13,7 @@ import RoleSelectionPage from './components/Onboarding/RoleSelection';
 import MentorForm from './components/Onboarding/MentorForm';
 import RecruiterForm from './components/Onboarding/RecruiterForm';
 import PendingPage from './components/Onboarding/PendingPage';
+import Mentor from './Mentor';
 
 import ProtectedRoute from './utils/ProtectedRoute';
 
@@ -79,7 +80,7 @@ function App() {
               }
             />
             <Route
-              path="/recruiter-dashboard"
+              path="/recruiter"
               element={
                 <ProtectedRoute allowedRole="recruiter">
                   <RecruiterDashboard />
@@ -95,6 +96,8 @@ function App() {
             <Route path='/Jobs' element={<AllJob/>} />
 
             <Route path='/RS' element={<RoadmapSection />} />
+            <Route path='/mentors' element={<Mentor />} />
+
 
           </Routes>
         </div>
