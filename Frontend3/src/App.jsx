@@ -18,7 +18,7 @@ import ProtectedRoute from './utils/ProtectedRoute';
 
 import './App.css'
 import MentorProfile from './components/Profile/MentorProfile';
-// import InternProfile from './components/Profile/InternProfile';
+import InternProfile from './components/Profile/InternProfile';
 import RecruiterProfile from './components/Profile/RecruiterProfile';
 import AllJob from './components/Jobs/AllJobs';
 import RoadmapSection from './components/Roadmap/RoadmapSection';
@@ -89,7 +89,7 @@ function App() {
 
             {/* Profiles */}
             <Route path='/Mentor-Profile' element={<MentorProfile />} />
-            {/* <Route path='/Intern-Profile' element={<InternProfile />} /> */}
+            <Route path='/Intern-Profile' element={<InternProfile />} />
             <Route path='/Recrut-Profile' element={<RecruiterProfile />} />
 
             <Route path='/Jobs' element={<AllJob/>} />
