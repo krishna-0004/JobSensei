@@ -24,7 +24,7 @@ router.put('/mentor-form', authenticateJWT, submitMentorDetails);
 router.put('/admin/approve/:userId', authenticateJWT, approveUser);
 router.get('/admin/pending', authenticateJWT, getPendingUsers);
 router.get('/:id',getUserById);
-router.get('/profile/:id', getProfileById);           // get full profile by id
+router.get('/profile/:id', getProfileById);          
 router.put('/profile/:id', updateProfileById); 
 router.put('/upload-avatar', authenticateJWT, upload.single('avatar'), uploadAvatar);
 router.post('/upload-image', upload.single('image'), uploadCertificateOrProjectImage);

@@ -19,7 +19,6 @@ const userSchema = new mongoose.Schema({
   },
   skills: [{ type: String }],
 
-  // ✅ New Shared Fields
   gender: {
     type: String,
     enum: ['male', 'female', 'others', 'prefer not to say'],
@@ -39,7 +38,7 @@ const userSchema = new mongoose.Schema({
     issuer: String,
     year: Number,
     credentialUrl: String,
-    imageUrl: String, // 📸 Certification image URL
+    imageUrl: String,
   }],
 
   projects: [{
@@ -47,7 +46,7 @@ const userSchema = new mongoose.Schema({
     description: String,
     link: String,
     techStack: [String],
-    imageUrl: String, // 📸 Project screenshot or cover photo
+    imageUrl: String,
   }],
 
   role: {
@@ -67,7 +66,6 @@ const userSchema = new mongoose.Schema({
   },
   rejectionReason: { type: String },
 
-  // Updated Business Details with Job References
   businessDetails: {
     companyName: { type: String },
     website: { type: String },
@@ -81,7 +79,7 @@ const userSchema = new mongoose.Schema({
     applicants: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
     jobs: [
       {
-        jobId: { type: mongoose.Schema.Types.ObjectId, ref: 'Job' }, // Reference to a Job model
+        jobId: { type: mongoose.Schema.Types.ObjectId, ref: 'Job' }, 
         title: { type: String },
         description: { type: String },
         location: { type: String },
@@ -90,7 +88,6 @@ const userSchema = new mongoose.Schema({
     ]
   },
 
-  // Mentor-specific Details
   mentorDetails: {
     expertise: [{ type: String }],
     linkedIn: { type: String },

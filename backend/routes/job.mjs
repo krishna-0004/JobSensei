@@ -3,7 +3,7 @@ import { getAllJobs, getAllBusinessDetails, applyToJob } from '../controllers/jo
 
 const router = express.Router();
 
-router.get('/jobs', getAllJobs); // /api/jobs?search=&location=&company=
+router.get('/jobs', getAllJobs);
 router.get('/business-details', getAllBusinessDetails);
 router.post('/apply', applyToJob);
 

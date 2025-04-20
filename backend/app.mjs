@@ -15,7 +15,7 @@ dotenv.config();
 const app = express();
 app.use(
   cors({
-    origin: "http://localhost:5173", // your frontend dev server
+    origin: "http://localhost:5173", 
     credentials: true,
   })
 );
@@ -31,7 +31,7 @@ app.use('/api', jobRoutes);
 
 mongoose.connect(process.env.MONGO_URI, {
 
-}).then(() => console.log('✅ MongoDB Connected'))
-  .catch((err) => console.error('❌ MongoDB Error:', err));
+}).then(() => console.log('MongoDB Connected'))
+  .catch((err) => console.error('MongoDB Error:', err));
 
 export default app;
