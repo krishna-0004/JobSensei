@@ -11,8 +11,8 @@ useGSAP(()=>{
   gsap.from("section div",{
     opacity:0,
     y:20,
-    duration:1,
-    stagger:0.5
+    duration:0.5,
+    stagger:0.2
   })
 
 

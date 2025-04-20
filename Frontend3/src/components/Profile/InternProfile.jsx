@@ -125,22 +125,24 @@ export default function IntanProfile() {
 
     return (
         <section className="p-6 overflow-y-auto h-screen max-md:pt-16">
-            <h2 className="text-2xl font-bold mb-4">Applicant Profile</h2>
+            <h2 className="text-3xl font-bold mb-4">Applicant Profile</h2>
 
 
 
             <div className=" bg-white rounded-2xl">
                 <div className="  p-10">
-                    <div className="flex justify-center items-center">
-                        {avatar && <img src={avatar} alt="Avatar" className="size-40 rounded-full object-cover" />}
-                        {/* <input type="file" accept="image/*" onChange={handleFileChange} /> */}
-                        {preview && <img src={preview} alt="Preview" className="w-20 h-20 rounded object-cover" />}
-                    </div>
+                 
 
                 </div>
 
                 {editing ? (
                     <>
+                           <div className="flex justify-center items-center">
+                        {avatar && <img src={avatar} alt="Avatar" className="size-40 rounded-full object-cover" />}
+                        {/* <input type="file" accept="image/*" onChange={handleFileChange} /> */}
+                        {preview && <img src={preview} alt="Preview" className="w-20 h-20 rounded object-cover" />}
+                    </div>
+
                         <div className="grid md:grid-cols-4 grid-cols-2 items-center gap-4 mx-6">
                             <input name="name" value={profile.name || ''} onChange={handleInputChange} className="input border-2 border-gray-500 px-4 py-2 rounded-2xl" placeholder="Name" />
                             <input name="phone" value={profile.phone || ''} onChange={handleInputChange} className="input border-2 border-gray-500 px-4 py-2 rounded-2xl" placeholder="Phone" />
@@ -237,7 +239,7 @@ export default function IntanProfile() {
                                         <input type="file" name='up' id='up' accept="image/*" className='hidden' onChange={(e) => handleImageUploadForNested(e, 'awardsAndCertifications', i)} />
                                         <label htmlFor='up' className="bg-sky-400 py-2  w-full text-white text-center rounded-2xl">Click To Upload</label>
                                     </div>
-                                    <button onClick={() => deleteNestedItem('awardsAndCertifications', i)} className="bg-red-600 text-white py-2 rounded-3xl text-sm"> Delete</button>
+                                    <button onClick={() => deleteNestedItem('awardsAndCertifications', i)} className="bg-red-600 text-white py-2 w-1/2 rounded-3xl text-sm"> Delete</button>
                                 </div>
                             ))}
                             <button onClick={() => addNestedItem('awardsAndCertifications', { title: '', issuer: '', year: '', credentialUrl: '', imageUrl: '' })} className="btn">
@@ -263,12 +265,12 @@ export default function IntanProfile() {
                                         }}
                                         className="input border-2 border-gray-500 px-4 py-2 rounded-2xl"
                                     />
-                                    <div className="w-full flex  ">
+                                    <div className="w-1/2 flex justify-center items-center  ">
                                         {proj.imageUrl && <img src={proj.imageUrl} alt="Project" className="w-32 h-20 object-cover rounded" />}
                                         <input type="file" name='Project' id='Project' accept="image/*" className='hidden' onChange={(e) => handleImageUploadForNested(e, 'projects', i)} />
-                                        <label htmlFor="Project" className=' py-2 w-full bg-sky-400 rounded-2xl text-white text-center'>Click To Upload</label>
+                                        <label htmlFor="Project" className=' py-2 px-6 bg-sky-400 rounded-2xl text-white text-center'>Click To Upload</label>
                                     </div>
-                                    <button onClick={() => deleteNestedItem('projects', i)} className="bg-red-600 text-white py-2 rounded-2xl hover:text-red-800 text-sm">
+                                    <button onClick={() => deleteNestedItem('projects', i)} className="bg-red-600 text-white py-2 w-1/2 rounded-2xl hover:text-red-800 text-sm">
                                         Delete
                                     </button>
                                 </div>
@@ -284,21 +286,28 @@ export default function IntanProfile() {
 
 
                             {/* Profile Header */}
-                            <div className="grid grid-cols-1  gap-8 mb-8">
+                            <div className="grid grid-cols-3  gap-8 mb-8">
+                                <div className="flex justify-center items-center">
+                                    {avatar && <img src={avatar} alt="Avatar" className="size-40 rounded-full object-cover" />}
+                                    {/* <input type="file" accept="image/*" onChange={handleFileChange} /> */}
+                                    {preview && <img src={preview} alt="Preview" className="w-20 h-20 rounded object-cover" />}
+                                </div>
 
                                 <div className="flex justify-center items-center max-md:flex-col">
                                     <div className="flex flex-col justify-center ">
-                                        <p className="text-lg text-gray-600 grid md:grid-cols-4 grid-cols-2" ><b className='justify-self-center'>Name:</b> <span className="md:col-span-3"> {profile.name} </span> </p>
-                                        <p className="text-lg text-gray-600 grid md:grid-cols-4 grid-cols-2" ><b className='justify-self-center'>Phone:</b> <span className='md:col-span-3'> {profile.phone} </span> </p>
-                                        <p className="text-lg text-gray-600 grid md:grid-cols-4 grid-cols-2" ><b className='justify-self-center'>Location:</b> <span className='md:col-span-3'> {profile.location}</span> </p>
+                                        <p className="text-lg text-gray-600 grid md:grid-cols-4 grid-cols-2 gap-4" ><b className=''>Name:</b> <span className="md:col-span-3"> {profile.name} </span> </p>
+                                        <p className="text-lg text-gray-600 grid md:grid-cols-4 grid-cols-2 gap-4" ><b className=''>Phone:</b> <span className='md:col-span-3'> {profile.phone} </span> </p>
+                                        <p className="text-lg text-gray-600 grid md:grid-cols-4 grid-cols-2 gap-4" ><b className=''>Location:</b> <span className='md:col-span-3'> {profile.location}</span> </p>
                                     </div>
 
-                                    <div className="flex flex-col justify-center">
-                                        <p className="text-lg text-gray-600 grid md:grid-cols-4 grid-cols-2  md:gap-2"><b className='md:col-start-2 justify-self-center'>Gender:</b> <span className='md:col-span-2'> {profile.gender} </span> </p>
-                                        <p className="text-lg text-gray-600 grid md:grid-cols-4 grid-cols-2  md:gap-2"><b className='md:col-start-2 justify-self-center'>Date of Birth:</b><span className="md:col-span-2">{profile.dateOfBirth}</span> </p>
-                                        <p className="text-lg text-gray-600 grid md:grid-cols-4 grid-cols-2  md:gap-2"><b className='md:col-start-2 justify-self-center'>Bio:</b><span className="md:col-span-2"> {profile.bio}</span></p>
-                                    </div>
+                                  
                                 </div>
+
+                                <div className="flex flex-col justify-center">
+                                        <p className="text-lg text-gray-600 grid md:grid-cols-4 grid-cols-2  md:gap-2"><b className=''>Gender:</b> <span className='md:col-span-2'> {profile.gender} </span> </p>
+                                        <p className="text-lg text-gray-600 grid md:grid-cols-4 grid-cols-2  md:gap-2"><b className=''>Date of Birth:</b><span className="md:col-span-2">{profile.dateOfBirth}</span> </p>
+                                        <p className="text-lg text-gray-600 grid md:grid-cols-4 grid-cols-2  md:gap-2"><b className=''>Bio:</b><span className="md:col-span-2"> {profile.bio}</span></p>
+                                    </div>
                             </div>
 
                             {/* Skills Section */}
