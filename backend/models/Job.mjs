@@ -5,9 +5,9 @@ const jobSchema = new mongoose.Schema({
   company: { type: String, required: true },
   location: { type: String },
   applyLink: { type: String },
-  salary: { type: String },         // optional
-  type: { type: String },           // optional: full-time, part-time, etc.
-  subject: { type: String },        // optional
+  salary: { type: String },         
+  type: { type: String },           
+  subject: { type: String },       
 }, { timestamps: true });
 
 export default mongoose.model('Job', jobSchema);

@@ -17,7 +17,6 @@ router.get('/google/callback', passport.authenticate('google', {
     process.env.JWT_SECRET,
     { expiresIn: '7d' }
   );
-  // frontend should handle this redirect + token saving
   res.redirect(`http://localhost:5173/auth-success?token=${token}`);
 });
 

@@ -31,36 +31,29 @@ async function triggerFastAPIRecommendations(userId) {
   const courseURL = `https://error404-prabal-production.up.railway.app/recommend_courses/${userId}`;
   const jobURL = `https://error404-prabal-production.up.railway.app/recommend_jobs/${userId}`;
 
-  // Trigger course recommendation
   try {
     const courseRes = await axios.get(courseURL, { responseType: 'text' });
     if (courseRes.data?.trim()) {
-      // console.log('✅ Course recommendation triggered for user:', userId, '| Response:', courseRes.data);
     } else {
-      console.warn('⚠️ Course API returned empty response for user:', userId);
+      console.warn('Course API returned empty response for user:', userId);
     }
   } catch (err) {
-    console.error('❌ Course API error:', err.message);
+    console.error('Course API error:', err.message);
     if (err.response?.data) {
-      console.error('📦 Course API response:', err.response.data);
+      console.error('Course API response:', err.response.data);
     }
   }
 
-  // Trigger job recommendation
   try {
     const jobRes = await axios.get(jobURL, { responseType: 'json' });
-    // console.log('✅ Job recommendation triggered for user:', userId, '| Response:', jobRes.data);
   } catch (err) {
     console.error('❌ Job API error:', err.message);
     if (err.response?.data) {
-      console.error('📦 Job API response:', err.response.data);
+      console.error('Job API response:', err.response.data);
     }
   }
 }
 
-
-
-// ✅ Step 3: Select Role
 export const selectRole = async (req, res) => {
   try {
     const { role } = req.body;
@@ -74,15 +67,12 @@ export const selectRole = async (req, res) => {
     }
 
     user.role = role;
-
-    // For Intan → mark complete, else wait for form submission
     if (role === 'intan') {
       user.profileCompleted = true;
     }
 
     await user.save();
 
-    // Sign new JWT with role
     const token = jwt.sign(
       { id: user._id, email: user.email, role: user.role },
       process.env.JWT_SECRET,
@@ -109,7 +99,7 @@ export const submitRecruiterDetails = async (req, res) => {
       address,
       pitchDeckUrl,
       isBusinessSubmitted
-    } = req.body.businessDetails || {}; // ✅ Extract from nested object
+    } = req.body.businessDetails || {};
 
     const user = await User.findById(userId);
     if (!user || user.role !== 'recruiter') {
@@ -149,7 +139,7 @@ export const submitMentorDetails = async (req, res) => {
       company,
       certifications,
       isMentorSubmitted
-    } = req.body.mentorDetails || {}; // ✅ Extract from nested object
+    } = req.body.mentorDetails || {};
 
     const user = await User.findById(userId);
     if (!user || user.role !== 'mentor') {
@@ -176,7 +166,6 @@ export const submitMentorDetails = async (req, res) => {
   }
 };
 
-// ✅ Step 5: Admin Approves User
 export const approveUser = async (req, res) => {
   try {
     const adminEmail = req.user.email;
@@ -202,7 +191,6 @@ export const approveUser = async (req, res) => {
   }
 };
 
-// ✅ Step 6: Get Pending Users (for Admin)
 export const getPendingUsers = async (req, res) => {
   try {
     const adminEmail = req.user.email;
@@ -233,8 +221,6 @@ export const rejectUser = async (req, res) => {
     if (!user) {
       return res.status(404).json({ message: 'User not found' });
     }
-
-    // Set status to rejected or remove user, depending on your logic
     user.status = 'rejected';
     await user.save();
 
@@ -261,7 +247,7 @@ export const uploadAvatar = async (req, res) => {
 
     if (!user) return res.status(404).json({ message: 'User not found' });
 
-    user.avatar = req.file.path; // Cloudinary image URL
+    user.avatar = req.file.path; 
     await user.save();
 
     res.status(200).json({ message: 'Avatar uploaded', avatarUrl: user.avatar });
@@ -271,22 +257,17 @@ export const uploadAvatar = async (req, res) => {
   }
 };
 
-// controllers/userController.mjs
-
-// GET /user/profile/:id
 export const getProfileById = async (req, res) => {
   try {
     const user = await User.findById(req.params.id).lean();
     if (!user) return res.status(404).json({ error: 'User not found' });
     res.status(200).json(user);
   } catch (err) {
-    console.error('❌ Fetch profile by ID error:', err);
+    console.error('Fetch profile by ID error:', err);
     res.status(500).json({ error: 'Server error' });
   }
 };
 
-// PUT /user/profile/:id
-// PUT /user/profile/:id
 export const updateProfileById = async (req, res) => {
   try {
     const {
@@ -302,7 +283,6 @@ export const updateProfileById = async (req, res) => {
       projects,
       experience,
       certifications,
-      // Add more if needed
     } = req.body;
 
     const updates = {
@@ -316,7 +296,7 @@ export const updateProfileById = async (req, res) => {
       education,
       awardsAndCertifications,
       projects,
-      'mentorDetails.certifications': certifications, // Optional if mentor role
+      'mentorDetails.certifications': certifications,
       experience,
     };
 
@@ -329,17 +309,17 @@ export const updateProfileById = async (req, res) => {
 
     res.status(200).json({ message: 'Profile updated successfully', user });
   } catch (err) {
-    console.error('❌ Update profile by ID error:', err);
+    console.error('Update profile by ID error:', err);
     res.status(500).json({ error: 'Server error' });
   }
 };
 
 export const uploadCertificateOrProjectImage = async (req, res) => {
   try {
-    const imageUrl = req.file.path; // Cloudinary returns the secure URL here
+    const imageUrl = req.file.path;
     res.status(200).json({ imageUrl });
   } catch (error) {
-    console.error('❌ Error uploading image:', error);
+    console.error('Error uploading image:', error);
     res.status(500).json({ error: 'Image upload failed' });
   }
 };
