@@ -40,8 +40,8 @@ function App() {
           </div>
         )}
 
-        <div className={`flex-1 `}>
-          <Routes>
+        <div className={`flex-1  `}>
+          <Routes className="">
 
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<Login />} />

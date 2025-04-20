@@ -44,7 +44,7 @@ const Mentor = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-white py-10 px-6">
+    <div className="h-screen overflow-y-auto bg-gradient-to-br from-blue-50 to-white py-10 px-6">
       <h1 className="text-4xl font-bold text-center text-blue-800 mb-10">Meet Your Mentors</h1>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
         {mentors.map((mentor) => (

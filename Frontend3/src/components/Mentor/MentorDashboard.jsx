@@ -29,7 +29,11 @@ const bookings = [
 
 const MentorDashboard = () => {
   return (
-    <div className=" bg-gray-50 p-8 overflow-y-auto h-screen">
+   <>
+   
+   
+   <section className="">
+   <div className=" bg-gray-50 p-8 overflow-y-auto h-screen  max-md:pt-16">
       <h1 className="text-4xl font-bold text-blue-700 mb-6 text-center">Mentor Dashboard</h1>
       
       <div className="mb-6 text-center">
@@ -56,6 +60,9 @@ const MentorDashboard = () => {
         ))}
       </div>
     </div>
+   </section>
+   
+   </>
   );
 };
 

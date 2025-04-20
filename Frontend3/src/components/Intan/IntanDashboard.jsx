@@ -51,7 +51,7 @@ export default function IntanDashboard() {
 
 
   return (
-    <section className="p-4 bg-sky-50 overflow-y-auto h-screen">
+    <section className="p-4 bg-sky-50 overflow-y-auto h-screen max-md:pt-14">
       <div>
         <h1 className="text-3xl font-bold mt-4 text-gray-800">Welcome</h1>
         <p className="text-base text-gray-500">AI Career Paths</p>
@@ -85,11 +85,14 @@ export default function IntanDashboard() {
             </div>
           </div>
 
-          
-          <div className="my-10 bg-gradient-to-br from-sky-500 to-sky-700 text-white p-6 rounded-3xl flex flex-col items-center gap-4 shadow">
+         
+         <a href="https://resumeanalyzer-error404.streamlit.app/" className="">
+           
+         <div className="my-10 bg-gradient-to-br from-sky-500 to-sky-700 text-white p-6 rounded-3xl flex flex-col items-center gap-4 shadow">
             <FileUser className='size-10' />
             <h2 className="text-center text-lg font-semibold">Job-Winning Resume</h2>
           </div>
+         </a>
 
           {/* Skill Building */}
           <div>
