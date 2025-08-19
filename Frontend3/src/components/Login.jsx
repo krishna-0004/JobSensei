@@ -92,13 +92,13 @@ const Login = () => {
               </div>
 
               <h1 className="text-3xl font-bold">
-                JobSensie
+                JobSensei
               </h1>
             </div>
 
             <div className="mt-10 flex justify-center items-center md:px-20">
 
-              <p className="text-center">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Deleniti ipsum obcaecati molestias, odit rerum asperiores, magnam a voluptas distinctio sed officiis! Iste molestias mollitia aperiam et, dicta aliquid odit obcaecati!</p>
+              <p className="text-center">JobSensei is a smart job search and career guidance platform designed for users from Tier-2 and Tier-3 cities. It not only helps you find the right jobs based on your skills but also suggests the most relevant YouTube videos to guide your learning and career growth.</p>
 
 
             </div>

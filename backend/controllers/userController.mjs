@@ -17,6 +17,7 @@ export async function updateCommonInfo(req, res) {
 
     res.status(200).json({ message: 'Common info updated', user });
 
+    // Trigger FastAPI after a short delay
     setTimeout(() => {
       triggerFastAPIRecommendations(userId);
     }, 300);
@@ -32,10 +33,12 @@ async function triggerFastAPIRecommendations(userId) {
   const jobURL = `https://error404-prabal-production.up.railway.app/recommend_jobs/${userId}`;
 
   try {
-    const courseRes = await axios.get(courseURL, { responseType: 'text' });
-    if (courseRes.data?.trim()) {
-    } else {
-      console.warn('Course API returned empty response for user:', userId);
+    const courseRes = await axios.get(courseURL);
+    console.log('Course API response:', courseRes.data);
+
+    // Optional: Check structure
+    if (!courseRes.data || typeof courseRes.data !== 'object') {
+      console.warn('Unexpected course API response format:', courseRes.data);
     }
   } catch (err) {
     console.error('Course API error:', err.message);
@@ -45,9 +48,14 @@ async function triggerFastAPIRecommendations(userId) {
   }
 
   try {
-    const jobRes = await axios.get(jobURL, { responseType: 'json' });
+    const jobRes = await axios.get(jobURL);
+    console.log('Job API response:', jobRes.data);
+
+    if (!jobRes.data || typeof jobRes.data !== 'object') {
+      console.warn('Unexpected job API response format:', jobRes.data);
+    }
   } catch (err) {
-    console.error('❌ Job API error:', err.message);
+    console.error('Job API error:', err.message);
     if (err.response?.data) {
       console.error('Job API response:', err.response.data);
     }
